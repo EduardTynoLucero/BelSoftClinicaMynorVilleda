@@ -5,7 +5,7 @@
  * An open source application development framework for PHP 5.1.6 or newer
  *
  * @package		CodeIgniter
- * @author		EllisLab Dev Team
+ * @author		BelSoftInc
  * @copyright		Copyright (c) 2008 - 2014, EllisLab, Inc.
  * @copyright		Copyright (c) 2014 - 2015, British Columbia Institute of Technology (http://bcit.ca/)
  * @license		http://codeigniter.com/user_guide/license.html
@@ -22,7 +22,7 @@
  * @package		CodeIgniter
  * @subpackage	Helpers
  * @category	Helpers
- * @author		EllisLab Dev Team
+ * @author		BelSoftInc
  * @link		http://codeigniter.com/user_guide/helpers/string_helper.html
  */
 

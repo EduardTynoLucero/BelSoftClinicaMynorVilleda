@@ -34,6 +34,7 @@
                         <li>  <?php echo lang('address'); ?><span class="label pull-right r-activity"><?php echo $patient->address; ?></span></li>
                         <li>  <?php echo lang('phone'); ?><span class="label pull-right r-activity"><?php echo $patient->phone; ?></span></li>
                         <li>  <?php echo lang('email'); ?><span class="label pull-right r-activity"><?php echo $patient->email; ?></span></li>
+                      
                     </ul>
 
                 </section>
@@ -46,6 +47,7 @@
 
 
 
+        <!-- IMPRIME TODA LA DATA DE LAS CITAS EN EL HISTORIAL DEL PACIENTE -->
         <section class="col-md-9">
             <header class="panel-heading clearfix">
                 <div class="col-md-7">
@@ -61,7 +63,7 @@
                 <header class="panel-heading tab-bg-dark-navy-blueee">
                     <ul class="nav nav-tabs">
                         <li class="active">
-                            <a data-toggle="tab" href="#appointments"><?php echo lang('appointments'); ?></a>
+                            <a data-toggle="tab" href="#appointments"><?php echo "Citas médicas"?></a>
                         </li>
                         <li class="">
                             <a data-toggle="tab" href="#home"><?php echo lang('case_history'); ?></a>
@@ -69,15 +71,15 @@
                         <li class="">
                             <a data-toggle="tab" href="#about"><?php echo lang('prescription'); ?></a>
                         </li>
-                        <li class="">
+                        <!-- <li class="">
                             <a data-toggle="tab" href="#lab"><?php echo lang('lab'); ?></a>
-                        </li>
+                        </li> -->
                         <li class="">
                             <a data-toggle="tab" href="#profile"><?php echo lang('documents'); ?></a>
                         </li>
-                        <li class="">
+                        <!-- <li class="">
                             <a data-toggle="tab" href="#contact"><?php echo lang('bed'); ?></a>
-                        </li>
+                        </li> -->
                         <li class="">
                             <a data-toggle="tab" href="#timeline"><?php echo lang('timeline'); ?></a> 
                         </li>
@@ -105,7 +107,7 @@
                                         <thead>
                                             <tr>
                                                 <th><?php echo lang('date'); ?></th>
-                                                <th><?php echo lang('time_slot'); ?></th>
+                                                <th><?php echo "Observación" ?></th>
                                                 <th><?php echo lang('doctor'); ?></th>
                                                 <th><?php echo lang('status'); ?></th>
                                                 <?php if (!$this->ion_auth->in_group('Patient')) { ?>
@@ -118,7 +120,7 @@
                                                 <tr class="">
 
                                                     <td><?php echo date('d-m-Y', $appointment->date); ?></td>
-                                                    <td><?php echo $appointment->time_slot; ?></td>
+                                                    <td><?php echo $appointment->remarks; ?></td>
                                                     <td>
                                                         <?php
                                                         $doctor_details = $this->doctor_model->getDoctorById($appointment->doctor);
@@ -130,7 +132,22 @@
                                                         echo $appointment_doctor;
                                                         ?>
                                                     </td>
-                                                    <td><?php echo $appointment->status; ?></td>
+                                                    
+                                                    <td><?php
+                                                    
+                                                    $estado = $appointment->status;
+                                                    if($estado == "Pending Confirmation"){
+                                                        echo "PENDIENTE DE CONFIRMAR";
+                                                    }else if ($estado == "Confirmed"){
+                                                        echo "CONFIRMADA";
+                                                    }else if($estado == "Treated"){
+                                                        echo "TRATADA";
+                                                    }else if($estado == "Cancelled"){
+                                                       echo "CANCELADA";
+                                                     }else{
+                                                         echo $estado;
+                                                     }
+                                                         ?></td>
                                                     <?php if (!$this->ion_auth->in_group('Patient')) { ?>
                                                         <td class="no-print">
                                                             <button type="button" class="btn btn-info btn-xs btn_width editAppointmentButton" title="<?php echo lang('edit'); ?>" data-toggle="modal" data-id="<?php echo $appointment->id; ?>"><i class="fa fa-edit"></i> </button>   
@@ -144,6 +161,7 @@
                                 </div>
                             </div>
                         </div>
+
                         <div id="home" class="tab-pane">
                             <div class="">
 
@@ -163,7 +181,7 @@
                                             <tr>
                                                 <th><?php echo lang('date'); ?></th>
                                                 <th><?php echo lang('title'); ?></th>
-                                                <th><?php echo lang('description'); ?></th>
+                                                <th><?php echo "Evolución médica"; ?></th>
                                                 <?php if (!$this->ion_auth->in_group(array('Patient'))) { ?>
                                                     <th class="no-print"><?php echo lang('options'); ?></th>
                                                 <?php } ?>
@@ -178,8 +196,10 @@
                                                     <td><?php echo $medical_history->description; ?></td>
                                                     <?php if (!$this->ion_auth->in_group(array('Patient'))) { ?>
                                                         <td class="no-print">
+                                                        <button type="button" class="btn btn-info btn-xs btn_width viewButton_evolucion" title="<?php echo "Ver Evolución médica" ?>" data-toggle="modal" data-id="<?php echo $medical_history->id; ?>"><i class="fa fa-eye"></i> </button>   
+
                                                             <button type="button" class="btn btn-info btn-xs btn_width editbutton" title="<?php echo lang('edit'); ?>" data-toggle="modal" data-id="<?php echo $medical_history->id; ?>"><i class="fa fa-edit"></i> </button>   
-                                                            <a class="btn btn-info btn-xs btn_width delete_button" title="<?php echo lang('delete'); ?>" href="patient/deleteCaseHistory?id=<?php echo $medical_history->id; ?>" onclick="return confirm('Are you sure you want to delete this item?');"><i class="fa fa-trash-o"></i> </a>
+                                                            <a class="btn btn-info btn-xs btn_width delete_button" title="<?php echo lang('delete'); ?>" href="patient/deleteCaseHistory?id=<?php echo $medical_history->id; ?>" onclick="return confirm('Estas seguro que quieres Eliminar la Evolución médica?');"><i class="fa fa-trash-o"></i> </a>
                                                         </td>
                                                     <?php } ?>
                                                 </tr>
@@ -504,13 +524,13 @@
 <!-- Add Patient Modal-->
 
 
-<!-- Add Medical History Modal-->
+<!-- Modal para agregar una evolucion medica-->
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                <h4 class="modal-title">  <?php echo lang('add_case'); ?></h4>
+                <h4 class="modal-title">  <?php echo "Añadir Evolución médica" ?></h4>
             </div> 
             <div class="modal-body">
                 <form role="form" action="patient/addMedicalHistory" class="clearfix row" method="post" enctype="multipart/form-data">
@@ -522,8 +542,30 @@
                         <label for="exampleInputEmail1"><?php echo lang('title'); ?></label>
                         <input type="text" class="form-control form-control-inline input-medium" name="title" id="exampleInputEmail1" value='' placeholder="">
                     </div>
+
                     <div class="form-group col-md-12">
-                        <label class=""><?php echo lang('description'); ?></label>
+                        <label class=""><?php echo "Datos Subjetivos"; ?></label>
+                        <textarea class="form-control ckeditor" name="dato_subjetivo" value="" rows="70" cols="70"></textarea>
+                    </div>
+                    <div class="form-group col-md-12">
+                        <label class=""><?php echo "Datos Objetivos"; ?></label>
+                        <textarea class="form-control ckeditor" name="dato_objetivo" value="" rows="70" cols="70"></textarea>
+                    </div>
+                    <div class="form-group col-md-12">
+                        <label class=""><?php echo "Nuevos Datos"; ?></label>
+                        <textarea class="form-control ckeditor" name="nuevo_dato" value="" rows="70" cols="70"></textarea>
+                    </div>
+                    <div class="form-group col-md-12">
+                        <label class=""><?php echo "Diagnóstico"; ?></label>
+                        <textarea class="form-control ckeditor" name="diagnostico" value="" rows="70" cols="70"></textarea>
+                    </div>
+                    <div class="form-group col-md-12">
+                        <label class=""><?php echo "Plan Terapeutico"; ?></label>
+                        <textarea class="form-control ckeditor" name="plan_terapeutico" value="" rows="70" cols="70"></textarea>
+                    </div>
+
+                    <div class="form-group col-md-12">
+                        <label class=""><?php echo "Evolución médica" ?></label>
                         <div class="">
                             <textarea class="ckeditor form-control" name="description" value="" rows="10"></textarea>
                         </div>
@@ -540,15 +582,125 @@
     </div><!-- /.modal-dialog -->
 </div>
 
-<!-- Add Medical History Modal-->
 
-<!-- Edit Medical History Modal-->
+
+
+<!-- Modal para verificar una evolucion medica-->
+<div class="modal fade" id="myModal_ver" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+  
+    <div class="modal-dialog">
+    <div id="imp1"><div style="background-color:#d4eefd;padding:12px;margin:12px 0 12px 0;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close no-print" id="xid" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title">  <?php echo "Detalle Evolución médica"?></h4>
+            </div>
+            <div class="modal-body row">
+                <form role="form" id="medical_historyViewForm" class="clearfix" action="patient/addMedicalHistory" method="post" enctype="multipart/form-data" style="margin:12px 0 12px 0;">
+                    <div class="form-group col-md-12 row">
+                        
+                        <div class="form-group col-md-6 case_date_block">
+                            <label for="exampleInputEmail1"><?php echo "Fecha Creación:" ?></label>
+                            <div class="case_date_ver"></div>
+                            <hr>
+                        </div>
+                        <div class="form-group col-md-6 case_patient_block">
+                            <label for="exampleInputEmail1"><?php echo "Paciente:" ?></label>
+                            <div class="case_patient_ver"></div>
+                            <hr>
+     
+                        </div> 
+                      
+                    </div>
+
+                    <div class="form-group col-md-12">
+                        <label for="exampleInputEmail1"><?php echo "Titulo" ?> </label>
+                        <div class="case_title_ver"></div>
+                        <hr>
+                    </div>
+
+
+                 
+
+                    <div class="form-group col-md-12">
+                        <label for="exampleInputEmail1"><?php echo "Datos Subjetivos"; ?> </label>
+                        <div class="dato_subjetivo_ver"></div>
+                        <hr>
+                    </div>
+
+
+                    <div class="form-group col-md-12">
+                        <label for="exampleInputEmail1"><?php echo "Datos Objetivos";?> </label>
+                        <div class="dato_objetivo_ver"></div>
+                        <hr>
+                    </div>
+
+                    <div class="form-group col-md-12">
+                        <label for="exampleInputEmail1"><?php echo "Nuevos Datos"; ?> </label>
+                        <div class="nuevo_dato_ver"></div>
+                        <hr>
+                    </div>
+
+                    <div class="form-group col-md-12">
+                        <label for="exampleInputEmail1"><?php echo "Diagnostico"; ?> </label>
+                        <div class="diagnostico_ver"></div>
+                        <hr>
+                    </div>
+
+                    <div class="form-group col-md-12">
+                        <label for="exampleInputEmail1"><?php echo "Plan Terapeutico"; ?> </label>
+                        <div class="plan_terapeutico_ver"></div>
+                        <hr>
+                    </div>
+
+                    <div class="form-group col-md-12">
+                        <label for="exampleInputEmail1"> <?php echo "Evolución médica" ?></label>
+                        <div class="case_details_ver"></div>
+                        <hr>
+                    </div>
+
+
+                    <div class="panel col-md-12">
+                        <h5 class="pull-right">
+            
+                            <?php echo "Clinica Medica Mynor Villeda" . '<br>' .   'Barcenas Villa Nueva' ?>
+                        </h5>
+                    </div>
+                    <br><br><br>
+
+                    <div class="panel col-md-12 no-print" id="ximpr">
+                        <a class="btn btn-info invoice_button pull-right" onclick="javascript:imprSelec('imp1')"><i class="fa fa-print"></i> <?php echo lang('print'); ?> </a>
+                    </div>
+
+                    <script language="Javascript">
+                        function imprSelec(nombre) {
+                      
+                        var ficha = document.getElementById(nombre);
+                        var ventimp = window.open(' ', 'popimpr');
+                        ventimp.document.write( ficha.innerHTML );
+                        ventimp.document.close();
+
+                        ventimp.print( );
+                        ventimp.close();
+                        }
+                        </script>
+                 
+                </form>
+            </div>
+        </div><!-- /.modal-content -->
+        </div></div>
+    </div><!-- /.modal-dialog -->
+    
+</div>
+
+
+<!-- Modal para editar una evolucion medica-->
 <div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                <h4 class="modal-title">  <?php echo lang('edit_case'); ?></h4>
+                <h4 class="modal-title">  <?php echo "Editar Evolución médica"; ?></h4>
             </div>
             <div class="modal-body">
                 <form role="form" id="medical_historyEditForm" class="clearfix row" action="patient/addMedicalHistory" method="post" enctype="multipart/form-data">
@@ -560,8 +712,46 @@
                         <label for="exampleInputEmail1"><?php echo lang('title'); ?></label>
                         <input type="text" class="form-control form-control-inline input-medium" name="title" id="exampleInputEmail1" value='' placeholder="">
                     </div>
+
                     <div class="form-group col-md-12">
-                        <label class=""><?php echo lang('description'); ?></label>
+                        <label class=""><?php echo "Datos Subjetivos"; ?></label>
+                      
+                        <div class="">
+                            <textarea class="ckeditor form-control editor" id="editor1" name="dato_subjetivo" value="" rows="70"></textarea>
+                        </div>
+                        
+                    </div>
+                    <div class="form-group col-md-12">
+                        <label class=""><?php echo "Datos Objetivos"; ?></label>
+                   
+
+                        <div class="">
+                            <textarea class="ckeditor form-control editor" id="editor2" name="dato_objetivo" value="" rows="70"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group col-md-12">
+                        <label class=""><?php echo "Nuevos Datos"; ?></label>
+   
+                        <div class="">
+                            <textarea class="ckeditor form-control editor" id="editor3" name="nuevo_dato" value="" rows="70"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group col-md-12">
+                        <label class=""><?php echo "Diagnóstico"; ?></label>
+                       
+                        <div class="">
+                            <textarea class="ckeditor form-control editor" id="editor4" name="diagnostico" value="" rows="70"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group col-md-12">
+                        <label class=""><?php echo "Plan Terapeutico"; ?></label>
+                        <div class="">
+                            <textarea class="ckeditor form-control editor" id="editor5" name="plan_terapeutico" value="" rows="70"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="form-group col-md-12">
+                        <label class=""><?php echo "Evolución médica"; ?></label>
                         <div class="">
                             <textarea class="ckeditor form-control editor" id="editor" name="description" value="" rows="10"></textarea>
                         </div>
@@ -807,30 +997,111 @@ if ($this->ion_auth->in_group('Doctor')) {
 
 
 <script src="common/js/codearistos.min.js"></script>
-<script type="text/javascript">
-                                                            $(document).ready(function () {
-                                                                $(".editbutton").click(function (e) {
-                                                                    e.preventDefault(e);
-                                                                    // Get the record's ID via attribute  
-                                                                    var iid = $(this).attr('data-id');
-                                                                    $('#myModal2').modal('show');
-                                                                    $.ajax({
-                                                                        url: 'patient/editMedicalHistoryByJason?id=' + iid,
-                                                                        method: 'GET',
-                                                                        data: '',
-                                                                        dataType: 'json',
-                                                                    }).success(function (response) {
-                                                                        // Populate the form fields with the data returned from server
-                                                                        var date = new Date(response.medical_history.date * 1000);
-                                                                        var de = date.getDate() + '-' + (date.getMonth() + 1) + '-' + date.getFullYear();
 
-                                                                        $('#medical_historyEditForm').find('[name="id"]').val(response.medical_history.id).end()
-                                                                        $('#medical_historyEditForm').find('[name="date"]').val(de).end()
-                                                                        $('#medical_historyEditForm').find('[name="title"]').val(response.medical_history.title).end()
-                                                                        CKEDITOR.instances['editor'].setData(response.medical_history.description)
-                                                                    });
-                                                                });
-                                                            });
+<script type="text/javascript">
+      $(document).ready(function () {
+
+            
+            
+
+
+             $(".viewButton_evolucion").click(function (e)  {
+                // Get the record's ID via attribute  
+                e.preventDefault(e);
+                var iid = $(this).attr('data-id');
+
+                $('#myModal_ver').modal('show');
+                $('.case_date_ver').html("").end()
+                $('.case_details_ver').html("").end()
+                $('.case_title_ver').html("").end()
+                $('.case_patient_ver').html("").end()
+                $('.case_patient_id_ver').html("").end()
+
+                $('.dato_subjetivo_ver').html("").end()
+                $('.dato_objetivo_ver').html("").end()
+                $('.nuevo_dato_ver').html("").end()
+                $('.diagnostico_ver').html("").end()
+                $('.plan_terapeutico_ver').html("").end()
+
+                $.ajax({
+                    url: 'patient/getCaseDetailsByJason?id=' + iid,
+                    method: 'GET',
+                    data: '',
+                    dataType: 'json',
+                }).success(function (response) {
+                    // Populate the form fields with the data returned from server
+                    var de = response.case.date * 1000;
+                    var d = new Date(de);
+
+
+                    var monthNames = [
+                        "Enero", "Febrero", "Marzo",
+                        "Abril", "Mayo", "Junio", "Julio",
+                        "Agosto", "Septiembre", "Octobre",
+                        "Noviembre", "Diciembre"
+                    ];
+
+                    var day = d.getDate() +1;
+                    var monthIndex = d.getMonth();
+                    var year = d.getFullYear();
+
+                    var da = day + ' ' + monthNames[monthIndex] + ', ' + year;
+
+
+                    $('.case_date_ver').append(da).end()
+                    $('.case_patient_ver').append(response.patient.name).end()
+                    $('.case_patient_id_ver').append('ID: ' + response.patient.id).end()
+                    $('.case_title_ver').append(response.case.title).end()
+                    $('.case_details_ver').append(response.case.description).end()
+
+                    $('.dato_subjetivo_ver').append(response.case.dato_subjetivo).end()
+                    $('.dato_objetivo_ver').append(response.case.dato_objetivo).end()
+                    $('.nuevo_dato_ver').append(response.case.nuevo_dato).end()
+                    $('.diagnostico_ver').append(response.case.description).end()
+                    $('.plan_terapeutico_ver').append(response.case.plan_terapeutico).end()
+
+
+
+
+
+                
+         
+               });
+            });
+        });
+</script>
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $(".editbutton").click(function (e) {
+         e.preventDefault(e);
+         // Get the record's ID via attribute  
+            var iid = $(this).attr('data-id');
+            $('#myModal2').modal('show');
+            $.ajax({
+                url: 'patient/editMedicalHistoryByJason?id=' + iid,
+                method: 'GET',
+                data: '',
+                dataType: 'json',
+            }).success(function (response) {
+                    // Populate the form fields with the data returned from server
+                    var date = new Date(response.medical_history.date * 1000);
+                    var de = (date.getDate() +1) + '-' + (date.getMonth() + 1) + '-' + date.getFullYear();
+
+                    $('#medical_historyEditForm').find('[name="id"]').val(response.medical_history.id).end()
+                    $('#medical_historyEditForm').find('[name="date"]').val(de).end()
+                    $('#medical_historyEditForm').find('[name="title"]').val(response.medical_history.title).end()
+                    CKEDITOR.instances['editor'].setData(response.medical_history.description)
+                                                                                
+                    CKEDITOR.instances['editor1'].setData(response.medical_history.dato_subjetivo)
+                    CKEDITOR.instances['editor2'].setData(response.medical_history.dato_objetivo)
+                    CKEDITOR.instances['editor3'].setData(response.medical_history.nuevo_dato)
+                    CKEDITOR.instances['editor4'].setData(response.medical_history.diagnostico)
+                    CKEDITOR.instances['editor5'].setData(response.medical_history.plan_terapeutico)
+                    });
+            });
+     });
 </script>
 
 
@@ -1193,6 +1464,24 @@ if ($this->ion_auth->in_group('Doctor')) {
     });
 </script>
 
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.0.272/jspdf.debug.js"></script>
+
+
+
+<script>
+
+
+                            $('#download_evolucion').click(function () {
+                                var pdf = new jsPDF('p', 'pt', 'letter');
+                                pdf.addHTML($('#evolucion_documento'), function () {
+                                    pdf.save('evolucion.pdf');
+                                });
+                            });
+
+                            // This code is collected but useful, click below to jsfiddle link.
+</script>
 
 
 

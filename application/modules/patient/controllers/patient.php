@@ -230,7 +230,7 @@ class Patient extends MX_Controller {
 
 
 
-                    $this->session->set_flashdata('feedback', 'Added');
+                    $this->session->set_flashdata('feedback', 'Agregado');
                 }
                 //    }
             } else { // Updating Patient
@@ -242,7 +242,7 @@ class Patient extends MX_Controller {
                 }
                 $this->patient_model->updateIonUser($username, $email, $password, $ion_user_id);
                 $this->patient_model->updatePatient($id, $data);
-                $this->session->set_flashdata('feedback', 'Updated');
+                $this->session->set_flashdata('feedback', 'Actualizado');
             }
             // Loading View
             if (!empty($redirect)) {
@@ -341,10 +341,10 @@ class Patient extends MX_Controller {
 
             if (empty($id)) {     // Adding New department
                 $this->patient_model->insertDiagnosticReport($data);
-                $this->session->set_flashdata('feedback', 'Added');
+                $this->session->set_flashdata('feedback', 'Agregado');
             } else { // Updating department
                 $this->patient_model->updateDiagnosticReport($id, $data);
-                $this->session->set_flashdata('feedback', 'Updated');
+                $this->session->set_flashdata('feedback', 'Actualizado');
             }
             // Loading View
             redirect('patient/report?id=' . $invoice);
@@ -550,7 +550,7 @@ class Patient extends MX_Controller {
                     }
                 } else {
                     $this->finance_model->insertDeposit($data);
-                    $this->session->set_flashdata('feedback', 'Added');
+                    $this->session->set_flashdata('feedback', 'Agregado');
                 }
             } else {
                 $this->finance_model->updateDeposit($id, $data);
@@ -563,7 +563,7 @@ class Patient extends MX_Controller {
                     $this->finance_model->updatePayment($amount_received_payment_id[0], $data_amount_received);
                 }
 
-                $this->session->set_flashdata('feedback', 'Updated');
+                $this->session->set_flashdata('feedback', 'Actualizado');
             }
             redirect('patient/myPaymentHistory');
         }
@@ -587,6 +587,13 @@ class Patient extends MX_Controller {
 
         $title = $this->input->post('title');
 
+        
+        $dato_subjetivo =  $this -> input->post('dato_subjetivo'); 
+        $dato_objetivo =  $this -> input->post('dato_objetivo'); 
+        $nuevo_dato =  $this -> input->post('nuevo_dato');  
+        $diagnostico =  $this -> input->post('diagnostico');  
+        $plan_terapeutico =  $this -> input->post('plan_terapeutico');  
+
         if (!empty($date)) {
             $date = strtotime($date);
         } else {
@@ -602,13 +609,13 @@ class Patient extends MX_Controller {
             $redirect = 'patient/medicalHistory?id=' . $patient_id;
         }
 
-        // Validating Name Field
+        // Valida el campo de nombre
         $this->form_validation->set_rules('date', 'Date', 'trim|min_length[1]|max_length[100]|xss_clean');
 
-        // Validating Title Field
+        // Valida el campo de titulo
         $this->form_validation->set_rules('title', 'Title', 'trim|min_length[1]|max_length[100]|xss_clean');
 
-        // Validating Password Field
+        // Valida el campo del password
 
         $this->form_validation->set_rules('description', 'Description', 'trim|min_length[5]|max_length[10000]|xss_clean');
 
@@ -644,14 +651,19 @@ class Patient extends MX_Controller {
                 'patient_name' => $patient_name,
                 'patient_phone' => $patient_phone,
                 'patient_address' => $patient_address,
+                'dato_subjetivo' => $dato_subjetivo,
+                'dato_objetivo' => $dato_objetivo,
+                'nuevo_dato' => $nuevo_dato,
+                'diagnostico' => $diagnostico,
+                'plan_terapeutico' => $plan_terapeutico
             );
 
-            if (empty($id)) {     // Adding New department
+            if (empty($id)) {     //  Agrega nuevo departamento
                 $this->patient_model->insertMedicalHistory($data);
-                $this->session->set_flashdata('feedback', 'Added');
+                $this->session->set_flashdata('feedback', 'Agregado');
             } else { // Updating department
                 $this->patient_model->updateMedicalHistory($id, $data);
-                $this->session->set_flashdata('feedback', 'Updated');
+                $this->session->set_flashdata('feedback', 'Actualizado');
             }
             // Loading View
             redirect($redirect);
@@ -995,7 +1007,7 @@ class Patient extends MX_Controller {
             }
 
             $this->patient_model->insertPatientMaterial($data);
-            $this->session->set_flashdata('feedback', 'Added');
+            $this->session->set_flashdata('feedback', 'Agregado');
 
 
             redirect($redirect);
@@ -1007,7 +1019,7 @@ class Patient extends MX_Controller {
         $redirect = $this->input->get('redirect');
         $case_history = $this->patient_model->getMedicalHistoryById($id);
         $this->patient_model->deleteMedicalHistory($id);
-        $this->session->set_flashdata('feedback', 'Deleted');
+        $this->session->set_flashdata('feedback', 'Eliminado');
         if ($redirect == 'case') {
             redirect('patient/caseList');
         } else {
@@ -1024,7 +1036,7 @@ class Patient extends MX_Controller {
             unlink($path);
         }
         $this->patient_model->deletePatientMaterial($id);
-        $this->session->set_flashdata('feedback', 'Deleted');
+        $this->session->set_flashdata('feedback', 'Eliminado');
         if ($redirect == 'documents') {
             redirect('patient/documents');
         } else {
@@ -1051,7 +1063,7 @@ class Patient extends MX_Controller {
         $this->db->where('id', $ion_user_id);
         $this->db->delete('users');
         $this->patient_model->delete($id);
-        $this->session->set_flashdata('feedback', 'Deleted');
+        $this->session->set_flashdata('feedback', 'Eliminado');
         redirect('patient');
     }
 
@@ -1079,6 +1091,8 @@ class Patient extends MX_Controller {
 
         foreach ($data['patients'] as $patient) {
 
+         
+
             if ($this->ion_auth->in_group(array('admin', 'Accountant', 'Receptionist', 'Laboratorist', 'Nurse', 'Doctor'))) {
                 //   $options1 = '<a type="button" class="btn editbutton" title="Edit" data-toggle="modal" data-id="463"><i class="fa fa-edit"> </i> Edit</a>';
                 $options1 = ' <a type="button" class="btn editbutton" title="' . lang('edit') . '" data-toggle = "modal" data-id="' . $patient->id . '"><i class="fa fa-edit"> </i> ' . lang('edit') . '</a>';
@@ -1088,7 +1102,7 @@ class Patient extends MX_Controller {
 
             $options3 = '<a class="btn green" title="' . lang('history') . '" style="color: #fff;" href="patient/medicalHistory?id=' . $patient->id . '"><i class="fa fa-stethoscope"></i> ' . lang('history') . '</a>';
 
-            $options4 = '<a class="btn invoicebutton" title="' . lang('payment') . '" style="color: #fff;" href="finance/patientPaymentHistory?patient=' . $patient->id . '"><i class="fa fa-money"></i> ' . lang('payment') . '</a>';
+           /*  $options4 = '<a class="btn invoicebutton" title="' . lang('payment') . '" style="color: #fff;" href="finance/patientPaymentHistory?patient=' . $patient->id . '"><i class="fa fa-money"></i> ' . lang('payment') . '</a>'; */
 
             if ($this->ion_auth->in_group(array('admin', 'Accountant', 'Receptionist', 'Laboratorist', 'Nurse', 'Doctor'))) {
                 $options5 = '<a class="btn delete_button" title="' . lang('delete') . '" href="patient/delete?id=' . $patient->id . '" onclick="return confirm(\'Are you sure you want to delete this item?\');"><i class="fa fa-trash-o"></i> ' . lang('delete') . '</a>';
@@ -1101,8 +1115,11 @@ class Patient extends MX_Controller {
                     $patient->id,
                     $patient->name,
                     $patient->phone,
-                    $this->settings_model->getSettings()->currency . $this->patient_model->getDueBalanceByPatientId($patient->id),
-                    $options1 . ' ' . $options6 . ' ' . $options3 . ' ' . $options4 . ' ' . $options5,
+                   // $this->settings_model->getSettings()->currency . $this->patient_model->getDueBalanceByPatientId($patient->id),
+                   $patient -> address,
+                  
+                    /* $options1 . ' ' . $options6 . ' ' . $options3 . ' ' . $options4 . ' ' . $options5, */
+                    $options1 . ' ' . $options6 . ' ' . $options3 . ' ' . $options5,
                         //  $options2
                 );
             }
@@ -1113,7 +1130,8 @@ class Patient extends MX_Controller {
                     $patient->name,
                     $patient->phone,
                     $this->settings_model->getSettings()->currency . $this->patient_model->getDueBalanceByPatientId($patient->id),
-                    $options1 . ' ' . $options6 . ' ' . $options4,
+                   // $options1 . ' ' . $options6 . ' ' . $options4,
+                    $options1 . ' ' . $options6 ,
                         //  $options2
                 );
             }
@@ -1171,7 +1189,7 @@ class Patient extends MX_Controller {
 
         foreach ($data['patients'] as $patient) {
 
-
+           
             if ($this->ion_auth->in_group(array('admin', 'Accountant', 'Receptionist', 'Laboratorist', 'Nurse', 'Doctor'))) {
                 //   $options1 = '<a type="button" class="btn editbutton" title="Edit" data-toggle="modal" data-id="463"><i class="fa fa-edit"> </i> Edit</a>';
                 $options1 = ' <a type="button" class="btn editbutton" title="' . lang('edit') . '" data-toggle = "modal" data-id="' . $patient->id . '"><i class="fa fa-edit"> </i> ' . lang('edit') . '</a>';

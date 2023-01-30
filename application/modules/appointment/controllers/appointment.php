@@ -698,20 +698,29 @@ class Appointment extends MX_Controller {
                 $patient_name = '';
             }
 
-            $info = '<br/>' . lang('status') . ': ' . $entry->status . '<br>' . lang('patient') . ': ' . $patient_name . '<br/>' . lang('phone') . ': ' . $patient_mobile . '<br/> Doctor: ' . $doctor . '<br/>' . lang('remarks') . ': ' . $entry->remarks;
+           
+
             if ($entry->status == 'Pending Confirmation') {
                 //  $color = '#098098';
                 $color = 'yellowgreen';
+                $new_estado_spanish = "Pendiente de Confirmar";
             }
             if ($entry->status == 'Confirmed') {
                 $color = '#009988';
+                $new_estado_spanish = "Confirmada";
             }
             if ($entry->status == 'Treated') {
                 $color = '#112233';
+                $new_estado_spanish = "Tratada";
             }
             if ($entry->status == 'Cancelled') {
                 $color = 'red';
+                $new_estado_spanish = "Cancelada";
             }
+
+
+            $info = '<br/>' . lang('status') . ': ' . $new_estado_spanish . '<br>' . lang('patient') . ': ' . $patient_name . '<br/>' . lang('phone') . ': ' . $patient_mobile . '<br/> Doctor: ' . $doctor . '<br/>' . lang('remarks') . ': ' . $entry->remarks;
+          
 
             $jsonevents[] = array(
                 'id' => $entry->id,
@@ -796,7 +805,7 @@ class Appointment extends MX_Controller {
         $id = $this->input->get('id');
         $doctor_id = $this->input->get('doctor_id');
         $this->appointment_model->delete($id);
-        $this->session->set_flashdata('feedback', 'Deleted');
+        $this->session->set_flashdata('feedback', 'Eliminada');
         if (!empty($doctor_id)) {
             redirect('appointment/getAppointmentByDoctorId?id=' . $doctor_id);
         } else {

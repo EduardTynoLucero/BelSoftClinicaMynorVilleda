@@ -6,7 +6,7 @@
         <section class="">
 
             <header class="panel-heading">
-                <?php echo lang('patient'); ?> <?php echo lang('database'); ?>
+                <?php echo "Listado de Pacientes" ?>
                 <div class="col-md-4 no-print pull-right"> 
                     <a data-toggle="modal" href="#myModal">
                         <div class="btn-group pull-right">
@@ -29,7 +29,7 @@
                                 <th><?php echo lang('name'); ?></th>
                                 <th><?php echo lang('phone'); ?></th>
                                 <?php if ($this->ion_auth->in_group(array('admin', 'Accountant', 'Receptionist'))) { ?>
-                                    <th><?php echo lang('due_balance'); ?></th>
+                                    <th><?php echo "Direccion"; ?></th>
                                 <?php } ?>
                                 <th class="no-print"><?php echo lang('options'); ?></th>
                             </tr>
@@ -68,7 +68,7 @@
 
 
 
-<!-- Add Patient Modal-->
+<!-- Modal para agregar un nuevo paciente-->
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -114,27 +114,27 @@
                                     echo 'selected';
                                 }
                             }
-                            ?> > Male </option>
+                            ?> > Masculino </option>
                             <option value="Female" <?php
                             if (!empty($patient->sex)) {
                                 if ($patient->sex == 'Female') {
                                     echo 'selected';
                                 }
                             }
-                            ?> > Female </option>
+                            ?> > Femenino </option>
                             <option value="Others" <?php
                             if (!empty($patient->sex)) {
                                 if ($patient->sex == 'Others') {
                                     echo 'selected';
                                 }
                             }
-                            ?> > Others </option>
+                            ?> > Otros </option>
                         </select>
                     </div>
 
                     <div class="form-group col-md-6">
                         <label><?php echo lang('birth_date'); ?></label>
-                        <input class="form-control form-control-inline input-medium default-date-picker" type="text" name="birthdate" value="" placeholder="" readonly="">      
+                        <input class="form-control form-control-inline input-medium default-date-picker" type="text" name="birthdate" value="" placeholder="" >      
                     </div>
 
 
@@ -212,7 +212,7 @@
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
 </div>
-<!-- Add Patient Modal-->
+<!-- Modal para crear un nuevo paciente-->
 
 
 
@@ -220,7 +220,7 @@
 
 
 
-<!-- Edit Patient Modal-->
+<!-- MODAL EDICION DE PACIENTE-->
 <div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -266,14 +266,14 @@
                                     echo 'selected';
                                 }
                             }
-                            ?> > Male </option>
+                            ?> > Maculino </option>
                             <option value="Female" <?php
                             if (!empty($patient->sex)) {
                                 if ($patient->sex == 'Female') {
                                     echo 'selected';
                                 }
                             }
-                            ?> > Female </option>
+                            ?> > Femenino</option>
                             <option value="Others" <?php
                             if (!empty($patient->sex)) {
                                 if ($patient->sex == 'Others') {

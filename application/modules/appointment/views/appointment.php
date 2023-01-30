@@ -25,19 +25,19 @@
                             <a data-toggle="tab" href="#all"><?php echo lang('all'); ?></a>
                         </li>
                         <li class="">
-                            <a data-toggle="tab" href="#pending"><?php echo lang('pending_confirmation'); ?></a>
+                            <a data-toggle="tab" href="#pending"><?php echo "Pendiente de Confirmar"; ?></a>
                         </li>
                         <li class="">
-                            <a data-toggle="tab" href="#confirmed"><?php echo lang('confirmed'); ?></a>
+                            <a data-toggle="tab" href="#confirmed"><?php echo "Confirmada" ?></a>
                         </li>
                         <li class="">
-                            <a data-toggle="tab" href="#treated"><?php echo lang('treated'); ?></a>
+                            <a data-toggle="tab" href="#treated"><?php echo "Tratada"; ?></a>
                         </li>
                         <li class="">
-                            <a data-toggle="tab" href="#cancelled"><?php echo lang('cancelled'); ?></a>
+                            <a data-toggle="tab" href="#cancelled"><?php echo "Cancelada" ?></a>
                         </li>
                          <li class="">
-                            <a data-toggle="tab" href="#requested"><?php echo lang('requested'); ?></a>
+                            <a data-toggle="tab" href="#requested"><?php echo "Pedidas"; ?></a>
                         </li>
                     </ul>
                     
@@ -106,12 +106,27 @@
                                                     echo $doctor;
                                                     ?>
                                                 </td>
-                                                <td class="center"><?php echo date('d-m-Y', $appointment->date); ?> : <?php echo $appointment->s_time; ?> - <?php echo $appointment->e_time; ?></td>
+                                                <td class="center"><?php echo date('d-m-Y', $appointment->date)?>: <?php echo $appointment->s_time; ?> - <?php echo $appointment->e_time; ?></td> 
                                                 <td>
                                                     <?php echo $appointment->remarks; ?>
                                                 </td>
                                                 <td>
-                                                    <?php echo $appointment->status; ?>
+                                                    <?php 
+                                                    
+                                                    $estado = $appointment->status;
+                                                    if($estado == "Pending Confirmation"){
+                                                        echo "PENDIENTE DE CONFIRMAR";
+                                                    }else if ($estado == "Confirmed"){
+                                                        echo "CONFIRMADA";
+                                                    }else if($estado == "Treated"){
+                                                        echo "TRATADA";
+                                                    }else if($estado == "Cancelled"){
+                                                       echo "CANCELADA";
+                                                     }else{
+                                                         echo $estado;
+                                                     }
+                                                    
+                                                    /* echo $appointment->status; */ ?>
                                                 </td>
                                                 <td>
 
@@ -185,12 +200,23 @@
                                                     echo $doctor;
                                                     ?>
                                                 </td>
-                                                <td class="center"><?php echo date('d-m-Y', $appointment->date); ?> : <?php echo $appointment->s_time; ?> - <?php echo $appointment->e_time; ?></td>
+                                                <td class="center"><?php echo date('d-m-Y', $appointment->date); ?>: <?php echo $appointment->s_time; ?> - <?php echo $appointment->e_time; ?></td>
                                                 <td>
                                                     <?php echo $appointment->remarks; ?>
                                                 </td>
                                                 <td>
-                                                    <?php echo $appointment->status; ?>
+                                                    <?php  $estado = $appointment->status;
+                                                    if($estado == "Pending Confirmation"){
+                                                        echo "PENDIENTE DE CONFIRMAR";
+                                                    }else if ($estado == "Confirmed"){
+                                                        echo "CONFIRMADA";
+                                                    }else if($estado == "Treated"){
+                                                        echo "TRATADA";
+                                                    }else if($estado == "Cancelled"){
+                                                       echo "CANCELADA";
+                                                     }else{
+                                                         echo $estado;
+                                                     } ?>
                                                 </td>
                                                 <td>
 
@@ -264,12 +290,23 @@
                                                     echo $doctor;
                                                     ?>
                                                 </td>
-                                                <td class="center"><?php echo date('d-m-Y', $appointment->date); ?> : <?php echo $appointment->s_time; ?> - <?php echo $appointment->e_time; ?></td>
+                                                <td class="center"><?php echo date('d-m-Y', $appointment->date); ?>: <?php echo $appointment->s_time; ?> - <?php echo $appointment->e_time; ?></td>
                                                 <td>
                                                     <?php echo $appointment->remarks; ?>
                                                 </td>
                                                 <td>
-                                                    <?php echo $appointment->status; ?>
+                                                    <?php  $estado = $appointment->status;
+                                                    if($estado == "Pending Confirmation"){
+                                                        echo "PENDIENTE DE CONFIRMAR";
+                                                    }else if ($estado == "Confirmed"){
+                                                        echo "CONFIRMADA";
+                                                    }else if($estado == "Treated"){
+                                                        echo "TRATADA";
+                                                    }else if($estado == "Cancelled"){
+                                                       echo "CANCELADA";
+                                                     }else{
+                                                         echo $estado;
+                                                     } ?>
                                                 </td>
                                                 <td>
 
@@ -349,7 +386,18 @@
                                                     <?php echo $appointment->remarks; ?>
                                                 </td>
                                                 <td>
-                                                    <?php echo $appointment->status; ?>
+                                                    <?php $estado = $appointment->status;
+                                                    if($estado == "Pending Confirmation"){
+                                                        echo "PENDIENTE DE CONFIRMAR";
+                                                    }else if ($estado == "Confirmed"){
+                                                        echo "CONFIRMADA";
+                                                    }else if($estado == "Treated"){
+                                                        echo "TRATADA";
+                                                    }else if($estado == "Cancelled"){
+                                                       echo "CANCELADA";
+                                                     }else{
+                                                         echo $estado;
+                                                     } ?>
                                                 </td>
                                                 <td>
 
@@ -426,12 +474,23 @@
                                                     echo $doctor;
                                                     ?>
                                                 </td>
-                                                <td class="center"><?php echo date('d-m-Y', $appointment->date); ?> : <?php echo $appointment->s_time; ?> - <?php echo $appointment->e_time; ?></td>
+                                                <td class="center"><?php echo date('d-m-Y', $appointment->date); ?>: <?php echo $appointment->s_time; ?> - <?php echo $appointment->e_time; ?></td>
                                                 <td>
                                                     <?php echo $appointment->remarks; ?>
                                                 </td>
                                                 <td>
-                                                    <?php echo $appointment->status; ?>
+                                                    <?php  $estado = $appointment->status;
+                                                    if($estado == "Pending Confirmation"){
+                                                        echo "PENDIENTE DE CONFIRMAR";
+                                                    }else if ($estado == "Confirmed"){
+                                                        echo "CONFIRMADA";
+                                                    }else if($estado == "Treated"){
+                                                        echo "TRATADA";
+                                                    }else if($estado == "Cancelled"){
+                                                       echo "CANCELADA";
+                                                     }else{
+                                                         echo $estado;
+                                                     } ?>
                                                 </td>
                                                 <td>
 
@@ -544,7 +603,7 @@
 
 
 
-<!-- Add Appointment Modal-->
+<!-- MODAL PARA AGREGAR CITA-->
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
     <div class="modal-dialog ">
         <div class="modal-content">
@@ -557,7 +616,7 @@
                     <div class="col-md-6 panel">
                         <label for="exampleInputEmail1"> <?php echo lang('patient'); ?></label> 
                         <select class="form-control m-bot15 js-example-basic-single pos_select" id="pos_select" name="patient" value=''> 
-                            <option value="">Select</option>
+                            <option value="">--SELECCIONE--</option>
                             <option value="add_new" style="color: #41cac0 !important;"><?php echo lang('add_new'); ?></option>
                             <?php foreach ($patients as $patient) { ?>
                                 <option value="<?php echo $patient->id; ?>" <?php
@@ -597,28 +656,28 @@
                                         echo 'selected';
                                     }
                                 }
-                                ?> > Male </option>   
+                                ?> >Maculino </option>   
                                 <option value="Female" <?php
                                 if (!empty($patient->sex)) {
                                     if ($patient->sex == 'Female') {
                                         echo 'selected';
                                     }
                                 }
-                                ?> > Female </option>
+                                ?> > Femenino </option>
                                 <option value="Others" <?php
                                 if (!empty($patient->sex)) {
                                     if ($patient->sex == 'Others') {
                                         echo 'selected';
                                     }
                                 }
-                                ?> > Others </option>
+                                ?> > Otros </option>
                             </select>
                         </div>
                     </div>
                     <div class="col-md-6 panel">
                         <label for="exampleInputEmail1">  <?php echo lang('doctor'); ?></label> 
                         <select class="form-control m-bot15 js-example-basic-single" id="adoctors" name="doctor" value=''>  
-                            <option value="">Select</option>
+                            <option value="">--SELECCIONE--</option>
                             <?php foreach ($doctors as $doctor) { ?>
                                 <option value="<?php echo $doctor->id; ?>"><?php echo $doctor->name; ?> </option>
                             <?php } ?>
@@ -628,8 +687,8 @@
                         <label for="exampleInputEmail1"> <?php echo lang('date'); ?></label>
                         <input type="text" class="form-control default-date-picker" id="date" readonly="" name="date" id="exampleInputEmail1" value='' placeholder="">
                     </div>
-                    <div class="col-md-6 panel">
-                        <label for="exampleInputEmail1">Available Slots</label>
+                    <div class="col-md-6 panel" >
+                        <label for="exampleInputEmail1">Horario Disponible</label>
                         <select class="form-control m-bot15" name="time_slot" id="aslots" value=''> 
 
                         </select>
@@ -684,7 +743,7 @@
                     <div class="col-md-6 panel">
                         <label for="exampleInputEmail1"> <?php echo lang('patient'); ?></label> 
                         <select class="form-control m-bot15 js-example-basic-single pos_select patient" id="pos_select" name="patient" value=''> 
-                            <option value="">Select</option>
+                            <option value="">--SELECCIONE--</option>
                             <option value="add_new" style="color: #41cac0 !important;"><?php echo lang('add_new'); ?></option>
                             <?php foreach ($patients as $patient) { ?>
                                 <option value="<?php echo $patient->id; ?>" <?php
@@ -724,28 +783,28 @@
                                         echo 'selected';
                                     }
                                 }
-                                ?> > Male </option>   
+                                ?> > Masculino </option>   
                                 <option value="Female" <?php
                                 if (!empty($patient->sex)) {
                                     if ($patient->sex == 'Female') {
                                         echo 'selected';
                                     }
                                 }
-                                ?> > Female </option>
+                                ?> > Femenino </option>
                                 <option value="Others" <?php
                                 if (!empty($patient->sex)) {
                                     if ($patient->sex == 'Others') {
                                         echo 'selected';
                                     }
                                 }
-                                ?> > Others </option>
+                                ?> > Otros </option>
                             </select>
                         </div>
                     </div>
                     <div class="col-md-6 panel">
                         <label for="exampleInputEmail1">  <?php echo lang('doctor'); ?></label> 
                         <select class="form-control m-bot15 js-example-basic-single doctor" id="adoctors1" name="doctor" value=''>  
-                            <option value="">Select</option>
+                            <option value="">--SELECCIONE--</option>
                             <?php foreach ($doctors as $doctor) { ?>
                                 <option value="<?php echo $doctor->id; ?>"><?php echo $doctor->name; ?> </option>
                             <?php } ?>
@@ -755,8 +814,8 @@
                         <label for="exampleInputEmail1"> <?php echo lang('date'); ?></label>
                         <input type="text" class="form-control default-date-picker" id="date1" readonly="" name="date" id="exampleInputEmail1" value='' placeholder="">
                     </div>
-                    <div class="col-md-6 panel">
-                        <label for="exampleInputEmail1">Available Slots</label>
+                    <div class="col-md-6 panel" >
+                        <label for="exampleInputEmail1">Horario Disponible</label>
                         <select class="form-control m-bot15" name="time_slot" id="aslots1" value=''> 
 
                         </select>

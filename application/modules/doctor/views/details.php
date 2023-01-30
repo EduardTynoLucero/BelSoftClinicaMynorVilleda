@@ -12,7 +12,7 @@
                 <header class="panel-heading tab-bg-dark-navy-blueee">
                     <ul class="nav nav-tabs">
                         <li class="">
-                            <a data-toggle="tab" href="#todays"><?php echo lang('todays'); ?> <?php echo lang('appointments'); ?></a>
+                            <a data-toggle="tab" href="#todays"><?php echo lang('todays'); ?></a>
                         </li>
                         <li class="">
                             <a data-toggle="tab" href="#patient"><?php echo lang('patient'); ?></a>
@@ -20,12 +20,12 @@
                         <li class="">
                             <a data-toggle="tab" href="#prescription"><?php echo lang('prescription'); ?></a>
                         </li>
-                        <li class="">
+                       <!--  <li class="">
                             <a data-toggle="tab" href="#schedule"><?php echo lang('schedule'); ?></a>
-                        </li>
-                        <li class="">
-                            <a data-toggle="tab" href="#holiday"><?php echo lang('holidays'); ?></a>
-                        </li>
+                        </li> -->
+                     <!--    <li class="">
+                            <a data-toggle="tab" href="#holiday"><php echo lang('holidays'); ?></a>
+                        </li> -->
                         <li class="active">
                             <a data-toggle="tab" href="#calendar"><?php echo lang('calendar'); ?></a>
                         </li>

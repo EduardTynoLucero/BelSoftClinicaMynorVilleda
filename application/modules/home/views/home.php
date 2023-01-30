@@ -328,33 +328,33 @@
                             </div>
                         <?php } ?>
 
-                        <?php if (in_array('lab', $this->modules)) { ?>
+                   <!--      php if (in_array('lab', $this->modules)) { ?>
                             <div class="col-lg-3 col-sm-6">
-                                <?php if ($this->ion_auth->in_group('admin')) { ?>
+                                php if ($this->ion_auth->in_group('admin')) { ?>
                                     <a href="lab">
-                                    <?php } ?>
+                                    php } ?>
                                     <section class="panel home_sec_green">
                                         <div class="symbol terques">
                                             <i class="fa fa-medkit"></i>
                                         </div>
                                         <div class="value">
                                             <h3 class="">
-                                                <?php
+                                                php
                                                 $this->db->where('hospital_id', $this->session->userdata('hospital_id'));
                                                 $this->db->from('lab');
                                                 $count = $this->db->count_all_results();
                                                 echo $count;
                                                 ?>
                                             </h3>
-                                            <p><?php echo lang('lab_report'); ?></p>
+                                            <p>php echo lang('lab_report'); ?></p>
                                         </div>
                                     </section>
-                                    <?php if ($this->ion_auth->in_group('admin')) { ?>
+                                    php if ($this->ion_auth->in_group('admin')) { ?>
                                     </a>
-                                <?php } ?>
+                                php } ?>
                             </div>
-                        <?php } ?>
-
+                        php } ?>
+ -->
 
 
                         <?php if (in_array('patient', $this->modules)) { ?>

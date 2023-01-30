@@ -108,6 +108,10 @@ class Patient_model extends CI_model {
     function insertMedicalHistory($data) {
         $data1 = array('hospital_id' => $this->session->userdata('hospital_id'));
         $data2 = array_merge($data, $data1);
+       /*  echo '<pre>';
+        var_dump($data2);
+        die();
+        echo '</pre>'; */
         $this->db->insert('medical_history', $data2);
     }
 
@@ -182,7 +186,10 @@ class Patient_model extends CI_model {
     function getMedicalHistoryById($id) {
         $this->db->where('id', $id);
         $query = $this->db->get('medical_history');
+/* 
+        echo '<pre>'; var_dump( $query->row()); die(); echo '</pre>' */;
         return $query->row();
+        
     }
 
     function updateMedicalHistory($id, $data) {

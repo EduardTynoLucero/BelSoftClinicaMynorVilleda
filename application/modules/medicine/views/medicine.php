@@ -57,14 +57,14 @@
                                 <th> <?php echo lang('id'); ?></th>
                                 <th> <?php echo lang('name'); ?></th>
                                 <th> <?php echo lang('category'); ?></th>
-                                <th> <?php echo lang('store_box'); ?></th>
+                               <!--  <th> <?php echo lang('store_box'); ?></th>
                                 <th> <?php echo lang('p_price'); ?></th>
-                                <th> <?php echo lang('s_price'); ?></th>
-                                <th> <?php echo lang('quantity'); ?></th>
+                                <th> <?php echo lang('s_price'); ?></th> -->
+                               <!--  <th> <?php echo lang('quantity'); ?></th> -->
                                 <th> <?php echo lang('generic_name'); ?></th>
-                                <th> <?php echo lang('company'); ?></th>
+                                <th> <?php echo "Laboratorio"; ?></th>
                                 <th> <?php echo lang('effects'); ?></th>
-                                <th> <?php echo lang('expiry_date'); ?></th>
+                              <!--   <th> <?php echo lang('expiry_date'); ?></th> -->
                                 <th> <?php echo lang('options'); ?></th>
                             </tr>
                         </thead>
@@ -99,10 +99,10 @@
                                 <td class="medici_name"><?php echo $i; ?></td>
                                 <td class="medici_name"><?php echo $medicine->name; ?></td>
                                 <td> <?php echo $medicine->category; ?></td>
-                                <td> <?php echo $medicine->box; ?></td>
+                      <!--           <td> <?php echo $medicine->box; ?></td>
                                 <td><?php echo $settings->currency; ?> <?php echo $medicine->price; ?></td>
-                                <td><?php echo $settings->currency; ?> <?php echo $medicine->s_price; ?></td>
-                                <td> <?php
+                                <td><?php echo $settings->currency; ?> <?php echo $medicine->s_price; ?></td> -->
+                               <!--  <td> <?php
                                     if ($medicine->quantity <= 0) {
                                         echo '<p class="os">Stock Out</p>';
                                     } else {
@@ -110,11 +110,11 @@
                                     }
                                     ?>
                                     <button type="button" class="btn btn-info btn-xs btn_width load" data-toggle="modal" data-id="<?php echo $medicine->id; ?>"> <?php echo lang('load'); ?></button> 
-                                </td>
+                                </td> -->
                                 <td class="center"><?php echo $medicine->generic; ?></td>
                                 <td><?php echo $medicine->company; ?></td>
                                 <td><?php echo $medicine->effects; ?></td>
-                                <td> <?php echo $medicine->e_date; ?></td>
+                              <!--   <td> <?php echo $medicine->e_date; ?></td> -->
                                 <td>
                                     <button type="button" class="btn btn-info btn-xs btn_width editbutton" data-toggle="modal" data-id="<?php echo $medicine->id; ?>"><i class="fa fa-edit"></i>  <?php echo lang('edit'); ?></button>   
                                     <a class="btn btn-info btn-xs btn_width delete_button" href="medicine/delete?id=<?php echo $medicine->id; ?>" onclick="return confirm('Are you sure you want to delete this item?');"><i class="fa fa-trash-o"> </i> <?php echo lang('delete'); ?></a>
@@ -234,7 +234,7 @@
 
 
 
-<!-- Add Accountant Modal-->
+<!-- Modal para agregar un medicamento-->
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -244,11 +244,11 @@
             </div>
             <div class="modal-body row">
                 <form role="form" action="medicine/addNewMedicine" class="clearfix" method="post" enctype="multipart/form-data">
-                    <div class="form-group col-md-5">
+                    <div class="form-group col-md-12">
                         <label for="exampleInputEmail1"> <?php echo lang('name'); ?></label>
                         <input type="text" class="form-control" name="name" id="exampleInputEmail1" value='' placeholder="">
                     </div>
-                    <div class="form-group col-md-5">
+                    <div class="form-group col-md-12">
                         <label for="exampleInputEmail1"> <?php echo lang('category'); ?></label>
                         <select class="form-control m-bot15" name="category" value=''>
                             <?php foreach ($categories as $category) { ?>
@@ -263,35 +263,49 @@
                         </select>
                     </div>
 
-                    <div class="form-group col-md-3">
+                    <div class="form-group col-md-3" style="display:none">
                         <label for="exampleInputEmail1"> <?php echo lang('p_price'); ?></label>
                         <input type="text" class="form-control" name="price" id="exampleInputEmail1" value='' placeholder="">
                     </div>
-                    <div class="form-group col-md-3">
+                    <div class="form-group col-md-3" style="display:none">
                         <label for="exampleInputEmail1"> <?php echo lang('s_price'); ?></label>
                         <input type="text" class="form-control" name="s_price" id="exampleInputEmail1" value='' placeholder="">
                     </div>
-                    <div class="form-group col-md-3">
+                    <div class="form-group col-md-3" style="display:none">
                         <label for="exampleInputEmail1"> <?php echo lang('quantity'); ?></label>
                         <input type="text" class="form-control" name="quantity" id="exampleInputEmail1" value='' placeholder="">
                     </div>
-                    <div class="form-group col-md-5">
+                    <div class="form-group col-md-12">
                         <label for="exampleInputEmail1"> <?php echo lang('generic_name'); ?></label>
                         <input type="text" class="form-control" name="generic" id="exampleInputEmail1" value='' placeholder="">
                     </div>
-                    <div class="form-group col-md-5">
-                        <label for="exampleInputEmail1"> <?php echo lang('company'); ?></label>
+                    <div class="form-group col-md-12">
+                        <label for="exampleInputEmail1"> <?php echo "Laboratorio" ?></label>
                         <input type="text" class="form-control" name="company" id="exampleInputEmail1" value='' placeholder="">
                     </div>
-                    <div class="form-group col-md-5">
+                    <div class="form-group col-md-12">
                         <label for="exampleInputEmail1"> <?php echo lang('effects'); ?></label>
                         <input type="text" class="form-control" name="effects" id="exampleInputEmail1" value='' placeholder="">
                     </div>
-                    <div class="form-group col-md-4"> 
+
+
+                    <div class="form-group col-md-12">
+                        <label for="exampleInputEmail1"> <?php echo "Principio Activo"; ?></label>
+                        <input type="text" class="form-control" name="principio_activo" id="exampleInputEmail1" value=''>
+                                          
+                    </div>
+                                        
+                    <div class="form-group col-md-12">
+                        <label for="exampleInputEmail1"> <?php echo "Descripcion Medicamento"; ?></label>
+                        <input type="text" class="form-control" name="descripcion" id="exampleInputEmail1" value=''>
+                    </div>
+
+
+                    <div class="form-group col-md-4" style="display:none"> 
                         <label for="exampleInputEmail1"> <?php echo lang('store_box'); ?></label>
                         <input type="text" class="form-control" name="box" id="exampleInputEmail1" value='' placeholder="">
                     </div>
-                    <div class="form-group col-md-3">
+                    <div class="form-group col-md-3" style="display:none">
                         <label for="exampleInputEmail1"> <?php echo lang('expiry_date'); ?></label>
                         <input type="text" class="form-control default-date-picker" name="e_date" id="exampleInputEmail1" value='' placeholder="" readonly="">
                     </div>
@@ -312,7 +326,7 @@
 
 
 
-<!-- Edit Event Modal-->
+<!-- Modal para editar un medicamento-->
 <div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -322,11 +336,11 @@
             </div>
             <div class="modal-body row">
                 <form role="form" id="editMedicineForm" class="clearfix" action="medicine/addNewMedicine" method="post" enctype="multipart/form-data">
-                    <div class="form-group col-md-5">
+                    <div class="form-group col-md-12">
                         <label for="exampleInputEmail1"> <?php echo lang('name'); ?></label>
                         <input type="text" class="form-control" name="name" id="exampleInputEmail1" value='' placeholder="">
                     </div>
-                    <div class="form-group col-md-5">
+                    <div class="form-group col-md-12">
                         <label for="exampleInputEmail1"> <?php echo lang('category'); ?></label>
                         <select class="form-control m-bot15" name="category" value=''>
                             <?php foreach ($categories as $category) { ?>
@@ -341,35 +355,48 @@
                         </select>
                     </div>
 
-                    <div class="form-group col-md-3">
+                    <div class="form-group col-md-3" style="display:none">
                         <label for="exampleInputEmail1"> <?php echo lang('p_price'); ?></label>
                         <input type="text" class="form-control" name="price" id="exampleInputEmail1" value='' placeholder="">
                     </div>
-                    <div class="form-group col-md-3">
+                    <div class="form-group col-md-3" style="display:none">
                         <label for="exampleInputEmail1"> <?php echo lang('s_price'); ?></label>
                         <input type="text" class="form-control" name="s_price" id="exampleInputEmail1" value='' placeholder="">
                     </div>
-                    <div class="form-group col-md-3">
+                    <div class="form-group col-md-3" style="display:none">
                         <label for="exampleInputEmail1"> <?php echo lang('quantity'); ?></label>
                         <input type="text" class="form-control" name="quantity" id="exampleInputEmail1" value='' placeholder="">
                     </div>
-                    <div class="form-group col-md-5">
+                    <div class="form-group col-md-12">
                         <label for="exampleInputEmail1"> <?php echo lang('generic_name'); ?></label>
                         <input type="text" class="form-control" name="generic" id="exampleInputEmail1" value='' placeholder="">
                     </div>
-                    <div class="form-group col-md-5">
-                        <label for="exampleInputEmail1"> <?php echo lang('company'); ?></label>
+                    <div class="form-group col-md-12">
+                        <label for="exampleInputEmail1"> <?php echo "Laboratorio"; ?></label>
                         <input type="text" class="form-control" name="company" id="exampleInputEmail1" value='' placeholder="">
                     </div>
-                    <div class="form-group col-md-5">
+                    <div class="form-group col-md-12">
                         <label for="exampleInputEmail1"> <?php echo lang('effects'); ?></label>
                         <input type="text" class="form-control" name="effects" id="exampleInputEmail1" value='' placeholder="">
                     </div>
-                    <div class="form-group col-md-4"> 
+
+                    <div class="form-group col-md-12">
+                        <label for="exampleInputEmail1"> <?php echo "Principio Activo"; ?></label>
+                        <input type="text" class="form-control" name="principio_activo" id="exampleInputEmail1" value=''>
+                                          
+                    </div>
+                                        
+                    <div class="form-group col-md-12">
+                        <label for="exampleInputEmail1"> <?php echo "Descripcion Medicamento"; ?></label>
+                        <input type="text" class="form-control" name="descripcion" id="exampleInputEmail1" value=''>
+                    </div>
+
+
+                    <div class="form-group col-md-4" style="display:none"> 
                         <label for="exampleInputEmail1"> <?php echo lang('store_box'); ?></label>
                         <input type="text" class="form-control" name="box" id="exampleInputEmail1" value='' placeholder="">
                     </div>
-                    <div class="form-group col-md-3">
+                    <div class="form-group col-md-3" style="display:none">
                         <label for="exampleInputEmail1"> <?php echo lang('expiry_date'); ?></label>
                         <input type="text" class="form-control default-date-picker" name="e_date" id="exampleInputEmail1" value='' placeholder="" readonly="">
                     </div>
@@ -462,6 +489,9 @@
                                                 $('#editMedicineForm').find('[name="company"]').val(response.medicine.company).end()
                                                 $('#editMedicineForm').find('[name="effects"]').val(response.medicine.effects).end()
                                                 $('#editMedicineForm').find('[name="e_date"]').val(response.medicine.e_date).end()
+
+                                                $('#editMedicineForm').find('[name="principio_activo"]').val(response.medicine.principio_activo).end()
+                                                $('#editMedicineForm').find('[name="descripcion"]').val(response.medicine.descripcion).end()
                                             });
                                         });
                                     });

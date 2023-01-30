@@ -71,7 +71,30 @@
                                     <?php echo $appointment->remarks; ?>
                                 </td>
                                 <td>
-                                    <?php echo $appointment->status; ?>
+                                    <?php 
+
+                                        if ( $appointment->status == 'Pending Confirmation') {
+                                     
+                                            $new_estado_spanish = "Pendiente de Confirmar";
+                                        }
+                                        else if ($appointment->status == 'Confirmed') {
+                                       
+                                            $new_estado_spanish = "Confirmada";
+                                        }
+                                        else if ($appointment->status == 'Treated') {
+                                            $color = '#112233';
+                                            $new_estado_spanish = "Tratada";
+                                        }
+                                        else if ($appointment->status == 'Cancelled') {
+                                            $color = 'red';
+                                            $new_estado_spanish = "Cancelada";
+                                        } else if ($appointment->status == 'Requested') {
+                                            $color = 'red';
+                                            $new_estado_spanish = "Cita Pedida";
+                                        }
+                                        echo $new_estado_spanish;
+                                    
+                                    ?>
                                 </td>
                                 <td>
 
@@ -109,7 +132,7 @@
                     <div class="col-md-4 panel">
                         <label for="exampleInputEmail1"> <?php echo lang('patient'); ?></label> 
                         <select class="form-control m-bot15 js-example-basic-single pos_select" id="pos_select" name="patient" value=''> 
-                            <option value="">Select</option>
+                            <option value="">--SELECCIONE--</option>
                             <option value="add_new" style="color: #41cac0 !important;"><?php echo lang('add_new'); ?></option>
                             <?php foreach ($patients as $patient) { ?>
                                 <option value="<?php echo $patient->id; ?>" <?php
@@ -149,28 +172,28 @@
                                         echo 'selected';
                                     }
                                 }
-                                ?> > Male </option>   
+                                ?> > Masculino </option>   
                                 <option value="Female" <?php
                                 if (!empty($patient->sex)) {
                                     if ($patient->sex == 'Female') {
                                         echo 'selected';
                                     }
                                 }
-                                ?> > Female </option>
+                                ?> > Femenino </option>
                                 <option value="Others" <?php
                                 if (!empty($patient->sex)) {
                                     if ($patient->sex == 'Others') {
                                         echo 'selected';
                                     }
                                 }
-                                ?> > Others </option>
+                                ?> > Otros </option>
                             </select>
                         </div>
                     </div>
                     <div class="col-md-4 panel">
                         <label for="exampleInputEmail1">  <?php echo lang('doctor'); ?></label> 
                         <select class="form-control m-bot15 js-example-basic-single" id="adoctors" name="doctor" value=''>  
-                            <option value="">Select</option>
+                            <option value="">--SELECCIONE--</option>
                             <?php foreach ($doctors as $doctor) { ?>
                                 <option value="<?php echo $doctor->id; ?>"><?php echo $doctor->name; ?> </option>
                             <?php } ?>
@@ -181,7 +204,7 @@
                         <input type="text" class="form-control default-date-picker" id="date" readonly="" name="date" id="exampleInputEmail1" value='' placeholder="">
                     </div>
                     <div class="col-md-6 panel">
-                        <label for="exampleInputEmail1">Available Slots</label>
+                        <label for="exampleInputEmail1">Horario Disponible</label>
                         <select class="form-control m-bot15" name="time_slot" id="aslots" value=''> 
 
                         </select>
@@ -241,7 +264,7 @@
                     <div class="col-md-4 panel">
                         <label for="exampleInputEmail1"> <?php echo lang('patient'); ?></label> 
                         <select class="form-control m-bot15 js-example-basic-single pos_select patient" id="pos_select" name="patient" value=''> 
-                            <option value="">Select</option>
+                            <option value="">--SELECCIONE--</option>
                             <option value="add_new" style="color: #41cac0 !important;"><?php echo lang('add_new'); ?></option>
                             <?php foreach ($patients as $patient) { ?>
                                 <option value="<?php echo $patient->id; ?>" <?php
@@ -281,28 +304,28 @@
                                         echo 'selected';
                                     }
                                 }
-                                ?> > Male </option>   
+                                ?> > Masculino </option>   
                                 <option value="Female" <?php
                                 if (!empty($patient->sex)) {
                                     if ($patient->sex == 'Female') {
                                         echo 'selected';
                                     }
                                 }
-                                ?> > Female </option>
+                                ?> > Femenino </option>
                                 <option value="Others" <?php
                                 if (!empty($patient->sex)) {
                                     if ($patient->sex == 'Others') {
                                         echo 'selected';
                                     }
                                 }
-                                ?> > Others </option>
+                                ?> > Otros </option>
                             </select>
                         </div>
                     </div>
                     <div class="col-md-4 panel">
                         <label for="exampleInputEmail1">  <?php echo lang('doctor'); ?></label> 
                         <select class="form-control m-bot15 js-example-basic-single doctor" id="adoctors1" name="doctor" value=''>  
-                            <option value="">Select</option>
+                            <option value="">--SELECCIONE--</option>
                             <?php foreach ($doctors as $doctor) { ?>
                                 <option value="<?php echo $doctor->id; ?>"><?php echo $doctor->name; ?> </option>
                             <?php } ?>
@@ -313,7 +336,7 @@
                         <input type="text" class="form-control default-date-picker" id="date1" readonly="" name="date" id="exampleInputEmail1" value='' placeholder="">
                     </div>
                     <div class="col-md-6 panel">
-                        <label for="exampleInputEmail1">Available Slots</label>
+                        <label for="exampleInputEmail1">Horario Disponible</label>
                         <select class="form-control m-bot15" name="time_slot" id="aslots1" value=''> 
 
                         </select>

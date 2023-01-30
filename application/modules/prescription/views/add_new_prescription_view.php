@@ -28,8 +28,8 @@ if ($this->ion_auth->in_group('Doctor')) {
                         <?php echo validation_errors(); ?>
                         <form role="form" action="prescription/addNewPrescription" class="clearfix" method="post" enctype="multipart/form-data">
                             <div class="">
-                                <div class="form-group col-md-4">
-                                    <label for="exampleInputEmail1"> <?php echo lang('date'); ?></label>
+                                <div class="form-group col-md-6">
+                                    <label for="exampleInputEmail1"> <?php echo "Fecha Receta (Obligatorio)"; ?></label>
                                     <input type="text" class="form-control default-date-picker" name="date" id="exampleInputEmail1" value='<?php
                                     if (!empty($setval)) {
                                         echo set_value('date');
@@ -39,8 +39,20 @@ if ($this->ion_auth->in_group('Doctor')) {
                                     }
                                     ?>' placeholder="" readonly="">
                                 </div>
-                                <div class="form-group col-md-4">
-                                    <label for="exampleInputEmail1"> <?php echo lang('patient'); ?></label>
+
+                                <div class="form-group col-md-6">
+                                    <label for="exampleInputEmail1"> <?php echo "Próxima Fecha (Opcional)"; ?></label>
+                                    <input type="text" class="form-control default-date-picker" name="date2" id="exampleInputEmail1" value='<?php
+                                    if (!empty($setval)) {
+                                        echo set_value('date');
+                                    }
+                                    if (!empty($prescription->date)) {
+                                        echo date('d-m-Y', $prescription->date);
+                                    }
+                                    ?>' placeholder="" readonly="">
+                                </div>
+                                <div class="form-group col-md-12">
+                                    <label for="exampleInputEmail1"> <?php echo "Paciente (Obligatorio)"; ?></label>
                                     <select class="form-control m-bot15 js-example-basic-single" name="patient" value=''>
                                         <?php foreach ($patients as $patient) { ?>
                                             <option value="<?php echo $patient->id; ?>" <?php
@@ -59,7 +71,7 @@ if ($this->ion_auth->in_group('Doctor')) {
                                     </select>
                                 </div>
                                 <?php if (!$this->ion_auth->in_group('Doctor')) { ?>
-                                    <div class="form-group col-md-4"> 
+                                    <div class="form-group col-md-12"> 
                                         <label for="exampleInputEmail1"> <?php echo lang('doctor'); ?></label>
                                         <select class="form-control m-bot15 js-example-basic-single" name="doctor" value=''>
                                             <?php foreach ($doctors as $doctor) { ?>
@@ -79,7 +91,7 @@ if ($this->ion_auth->in_group('Doctor')) {
                                         </select>
                                     </div>
                                 <?php } else { ?>
-                                    <div class="form-group col-md-4"> 
+                                    <div class="form-group col-md-12"> 
                                         <label for="exampleInputEmail1"> <?php echo lang('doctor'); ?></label>
                                         <select class="form-control m-bot15 js-example-basic-single" name="doctor" value=''>
                                             <?php
@@ -106,8 +118,19 @@ if ($this->ion_auth->in_group('Doctor')) {
                                     </div>
                                 <?php } ?>
 
-                                <div class="form-group col-md-6">
-                                    <label class="control-label"><?php echo lang('history'); ?></label>
+                                <div class="form-group col-md-12">
+                                    <label class="control-label"><?php echo "Descripción Receta (Obligatorio)"; ?></label>
+                                    <textarea class="form-control ckeditor" id="editor3" name="note" value="" rows="30" cols="20"><?php
+                                        if (!empty($setval)) {
+                                            echo set_value('note');
+                                        }
+                                        if (!empty($prescription->note)) {
+                                            echo $prescription->note;
+                                        }
+                                        ?></textarea>
+                                </div>
+                                <div class="form-group col-md-12">
+                                    <label class="control-label"><?php echo "Historial Paciente (Opcional)" ?></label>
                                     <textarea class="form-control ckeditor" id="editor1" name="symptom" value="" rows="50" cols="20"><?php
                                         if (!empty($setval)) {
                                             echo set_value('symptom');
@@ -120,17 +143,7 @@ if ($this->ion_auth->in_group('Doctor')) {
 
 
 
-                                <div class="form-group col-md-6">
-                                    <label class="control-label"><?php echo lang('note'); ?></label>
-                                    <textarea class="form-control ckeditor" id="editor3" name="note" value="" rows="30" cols="20"><?php
-                                        if (!empty($setval)) {
-                                            echo set_value('note');
-                                        }
-                                        if (!empty($prescription->note)) {
-                                            echo $prescription->note;
-                                        }
-                                        ?></textarea>
-                                </div>
+                                
 
                                 <div class="form-group col-md-12">
                                     <label class="control-label col-md-3"> <?php echo lang('medicine'); ?></label>
@@ -255,58 +268,58 @@ if ($this->ion_auth->in_group('Doctor')) {
             } else {
 
                 $(".medicine").append('<section id="med_selected_section-' + med_id + '" class="med_selected row">\n\
-         <div class = "form-group medicine_sect col-md-2"><div class=col-md-12>\n\
-<label> <?php echo lang("medicine"); ?> </label>\n\
-</div>\n\
-\n\
-<div class=col-md-12>\n\
-<input class = "medi_div" name = "med_id[]" value = "' + med_name + '" placeholder="" required>\n\
- <input type="hidden" id="med_id-' + id + '" class = "medi_div" name = "medicine[]" value = "' + med_id + '" placeholder="" required>\n\
- </div>\n\
- </div>\n\
-\n\
-<div class = "form-group medicine_sect col-md-2" ><div class=col-md-12>\n\
-<label><?php echo lang("dosage"); ?> </label>\n\
-</div>\n\
-<div class=col-md-12><input class = "state medi_div" name = "dosage[]" value = "' + dosage + '" placeholder="100 mg" required>\n\
- </div>\n\
- </div>\n\
-\n\
-<div class = "form-group medicine_sect col-md-2"><div class=col-md-12>\n\
-<label><?php echo lang("frequency"); ?> </label>\n\
-</div>\n\
-<div class=col-md-12><input class = "potency medi_div sale" id="salee' + count + '" name = "frequency[]" value = "' + frequency + '" placeholder="1 + 0 + 1" required>\n\
-</div>\n\
-</div>\n\
-\n\
-<div class = "form-group medicine_sect col-md-2"><div class=col-md-12>\n\
-<label>\n\
-<?php echo lang("days"); ?> \n\
-</label>\n\
-</div>\n\
-<div class=col-md-12><input class = "potency medi_div quantity" id="quantity' + count + '" name = "days[]" value = "' + days + '" placeholder="7 days" required>\n\
-</div>\n\
-</div>\n\
-\n\
-\n\<div class = "form-group medicine_sect col-md-2"><div class=col-md-12>\n\
-<label>\n\
-<?php echo lang("instruction"); ?> \n\
-</label>\n\
-</div>\n\
-<div class=col-md-12><input class = "potency medi_div quantity" id="quantity' + count + '" name = "instruction[]" value = "' + instruction + '" placeholder="After Food" required>\n\
-</div>\n\
-</div>\n\
-\n\
-\n\
- <div class="del col-md-1"></div>\n\
-</section>');
+         <div class = "form-group medicine_sect col-md-12"><div class=col-md-12>\n\
+        <label> <?php echo "Medicamento"; ?> </label>\n\
+        </div>\n\
+        \n\
+        <div class=col-md-12>\n\
+        <input class = "col-md-12" name = "med_id[]" value = "' + med_name + '" placeholder="" required>\n\
+        <input type="hidden" id="med_id-' + id + '" class = "medi_div" name = "medicine[]" value = "' + med_id + '" placeholder="" required>\n\
+        </div>\n\
+        </div>\n\
+        \n\
+        <div class = "form-group medicine_sect col-md-12" ><div class=col-md-12>\n\
+        <label><?php echo lang("dosage"); ?> </label>\n\
+        </div>\n\
+        <div class=col-md-12><input class = "col-md-12" name = "dosage[]" value = "' + dosage + '" placeholder="100 mg" required>\n\
+        </div>\n\
+        </div>\n\
+        \n\
+        <div class = "form-group medicine_sect col-md-12" style="display:none"><div class=col-md-12>\n\
+        <label><?php echo lang("frequency"); ?> </label>\n\
+        </div>\n\
+        <div class=col-md-12><input class = "col-md-12" id="salee' + count + '" name = "frequency[]" value = "' + frequency + '" placeholder="1 + 0 + 1" >\n\
+        </div>\n\
+        </div>\n\
+        \n\
+        <div class = "form-group medicine_sect col-md-12"><div class=col-md-12>\n\
+        <label>\n\
+        <?php echo lang("days"); ?> \n\
+        </label>\n\
+        </div>\n\
+        <div class=col-md-12><input class = "col-md-12" id="quantity' + count + '" name = "days[]" value = "' + days + '" placeholder="7 days" required>\n\
+        </div>\n\
+        </div>\n\
+        \n\
+        \n\<div class = "form-group medicine_sect col-md-12"><div class=col-md-12>\n\
+        <label>\n\
+        <?php echo lang("instruction"); ?> \n\
+        </label>\n\
+        </div>\n\
+        <div class=col-md-12><input class = "col-md-12" id="quantity' + count + '" name = "instruction[]" value = "' + instruction + '" placeholder="After Food" required>\n\
+        </div>\n\
+        </div>\n\
+        \n\
+        \n\
+        <div class="del col-md-1"></div>\n\
+        </section>');
+                    }
+                });
             }
-        });
-    }
-    );
+            );
 
 
-</script> 
+        </script> 
 
 
 
@@ -337,45 +350,45 @@ if ($this->ion_auth->in_group('Doctor')) {
 
 
                     $(".medicine").append('<section class="med_selected row" id="med_selected_section-' + med_id + '">\n\
-         <div class = "form-group medicine_sect col-md-2"><div class=col-md-12>\n\
-<label> <?php echo lang("medicine"); ?> </label>\n\
+         <div class = "form-group medicine_sect col-md-12"><div class=col-md-12>\n\
+<label> <?php echo "Medicamento"; ?> </label>\n\
 </div>\n\
 \n\
 <div class=col-md-12>\n\
-<input class = "medi_div" name = "med_id[]" value = "' + med_name + '" placeholder="" required>\n\
- <input type="hidden" class = "medi_div" id="med_id-' + id + '" name = "medicine[]" value = "' + med_id + '" placeholder="" required>\n\
+<input class = "col-md-12" name = "med_id[]" value = "' + med_name + '" placeholder="" required>\n\
+ <input type="hidden" class = "col-md-12" id="med_id-' + id + '" name = "medicine[]" value = "' + med_id + '" placeholder="" required>\n\
  </div>\n\
  </div>\n\
 \n\
-<div class = "form-group medicine_sect col-md-2" ><div class=col-md-12>\n\
+<div class = "form-group medicine_sect col-md-12" ><div class=col-md-12>\n\
 <label><?php echo lang("dosage"); ?> </label>\n\
 </div>\n\
-<div class=col-md-12><input class = "state medi_div" name = "dosage[]" value = "" placeholder="100 mg" required>\n\
+<div class=col-md-12><input class = "col-md-12" name = "dosage[]" value = "" placeholder="100 mg" required>\n\
  </div>\n\
  </div>\n\
 \n\
-<div class = "form-group medicine_sect col-md-2"><div class=col-md-12>\n\
+<div class = "form-group medicine_sect col-md-12" style="display:none"><div class=col-md-12>\n\
 <label><?php echo lang("frequency"); ?> </label>\n\
 </div>\n\
-<div class=col-md-12><input class = "potency medi_div sale" id="salee' + count + '" name = "frequency[]" value = "" placeholder="1 + 0 + 1" required>\n\
+<div class=col-md-12><input class = "col-md-12" id="salee' + count + '" name = "frequency[]" value = "" placeholder="1 + 0 + 1" >\n\
 </div>\n\
 </div>\n\
 \n\
-<div class = "form-group medicine_sect col-md-2"><div class=col-md-12>\n\
+<div class = "form-group medicine_sect col-md-12"><div class=col-md-12>\n\
 <label>\n\
 <?php echo lang("days"); ?> \n\
 </label>\n\
 </div>\n\
-<div class=col-md-12><input class = "potency medi_div quantity" id="quantity' + count + '" name = "days[]" value = "" placeholder="7 days" required>\n\
+<div class=col-md-12><input class = "col-md-12" id="quantity' + count + '" name = "days[]" value = "" placeholder="7 dias" required>\n\
 </div>\n\
 </div>\n\
 \n\
-\n\<div class = "form-group medicine_sect col-md-2"><div class=col-md-12>\n\
+\n\<div class = "form-group medicine_sect col-md-12"><div class=col-md-12>\n\
 <label>\n\
 <?php echo lang("instruction"); ?> \n\
 </label>\n\
 </div>\n\
-<div class=col-md-12><input class = "potency medi_div quantity" id="quantity' + count + '" name = "instruction[]" value = "" placeholder="After Food" required>\n\
+<div class=col-md-12><input class = "col-md-12" id="quantity' + count + '" name = "instruction[]" value = "" placeholder="Despues de Comer" required>\n\
 </div>\n\
 </div>\n\
 \n\

@@ -164,12 +164,12 @@ class Email extends MX_Controller {
                     'user' => $this->ion_auth->get_user_id()
                 );
                 $this->email_model->insertEmail($data);
-                $this->session->set_flashdata('feedback', 'Message Sent');
+                $this->session->set_flashdata('feedback', 'CORREO ENVIADO');
             } else {
-                $this->session->set_flashdata('feedback', 'Email Failed');
+                $this->session->set_flashdata('feedback', 'ERROR DE ENVIO');
             }
         } else {
-            $this->session->set_flashdata('feedback', 'Not Sent');
+            $this->session->set_flashdata('feedback', 'NO ENVIADO');
         }
         redirect('email/sendView');
     }
@@ -356,7 +356,7 @@ class Email extends MX_Controller {
     function delete() {
         $id = $this->input->get('id');
         $this->email_model->delete($id);
-        $this->session->set_flashdata('feedback', 'Deleted');
+        $this->session->set_flashdata('feedback', 'ELIMINADO');
         redirect('email/sent');
     }
 

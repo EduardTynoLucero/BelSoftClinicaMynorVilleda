@@ -43,7 +43,25 @@
                                 <tr class="">
                                     <td style=""> <?php echo $i; ?></td> 
                                     <td> <?php echo $this->doctor_model->getDoctorById($schedule->doctor)->name; ?></td>
-                                    <td> <?php echo $schedule->weekday; ?></td> 
+                                    <td> <?php 
+                                    
+                                    $dia_laborable = $schedule->weekday;
+                                                    if($dia_laborable == "Monday"){
+                                                        echo "Lunes";
+                                                    }else if ($dia_laborable == "Tuesday"){
+                                                        echo "Martes";
+                                                    }else if($dia_laborable == "Wednesday"){
+                                                        echo "Miércoles";
+                                                    }else if($dia_laborable == "Thursday"){
+                                                       echo "Jueves";
+                                                     }else if($dia_laborable == "Friday"){
+                                                         echo "Viernes";
+                                                     }else if($dia_laborable == "Saturday"){
+                                                         echo "Sábado";
+                                                     }else if($dia_laborable == "Sunday"){
+                                                         echo "Domingo";
+                                                     }
+                                    ?></td> 
                                     <td><?php echo $schedule->s_time; ?></td>
                                     <td><?php echo $schedule->e_time; ?></td>
                                     <td><?php echo $schedule->duration * 5 . ' ' . lang('minitues'); ?></td>

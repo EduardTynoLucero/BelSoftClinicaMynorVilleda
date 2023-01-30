@@ -8,7 +8,7 @@
             $this->db->where('hospital_id', $this->hospital_id);
         }
         echo $this->db->get('settings')->row()->system_vendor;
-        ?> by Code Aristos.
+        ?> Desarrollado Por Belsoft and Associates Inc V. 2.0
         <a href="<?php echo current_full_url() . '#'; ?>" class="go-top">
             <i class="fa fa-angle-up"></i>
         </a>

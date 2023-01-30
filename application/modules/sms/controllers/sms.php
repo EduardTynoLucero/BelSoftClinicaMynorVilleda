@@ -160,6 +160,7 @@ class Sms extends MX_Controller {
             $patient_detail = $this->patient_model->getPatientById($patient);
             $single_patient_phone = $patient_detail->phone;
             $recipient = 'Patient Id: ' . $patient_detail->id . '<br> Patient Name: ' . $patient_detail->name . '<br> Patient Phone: ' . $patient_detail->phone;
+            echo '<pre>'; var_dump($patient_detail->phone); echo '</pre>';
         }
 
         if (!empty($single_patient_phone)) {
@@ -183,7 +184,7 @@ class Sms extends MX_Controller {
                 'user' => $this->ion_auth->get_user_id()
             );
             $this->sms_model->insertSms($data);
-            $this->session->set_flashdata('feedback', 'Message Sent');
+            $this->session->set_flashdata('feedback', 'MENSAJE ENVIADO');
         } else {
             $this->session->set_flashdata('feedback', 'Not Sent');
         }

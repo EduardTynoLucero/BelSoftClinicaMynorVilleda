@@ -50,8 +50,8 @@ $active_record = TRUE;
 
 $db['default']['hostname'] = 'localhost';
 $db['default']['username'] = 'root';
-$db['default']['password'] = 'eduardo@1997';
-$db['default']['database'] = 'hospital';
+$db['default']['password'] = '';
+$db['default']['database'] = 'belsoft_clinica';
 $db['default']['dbdriver'] = 'mysqli';
 $db['default']['dbprefix'] = '';
 $db['default']['pconnect'] = TRUE;

@@ -20,7 +20,7 @@
                                 <div class = "panel-body">
                                     <?php echo validation_errors(); ?>
                                     <form role="form" action="medicine/addNewMedicine" class="clearfix" method="post" enctype="multipart/form-data">
-                                        <div class="form-group col-md-6">
+                                        <div class="form-group col-md-12">
                                             <label for="exampleInputEmail1"> <?php echo lang('name'); ?></label>
                                             <input type="text" class="form-control" name="name" id="exampleInputEmail1" value='<?php
                                             if (!empty($medicine->name)) {
@@ -28,7 +28,7 @@
                                             }
                                             ?>' placeholder="">
                                         </div>
-                                        <div class="form-group col-md-6">
+                                        <div class="form-group col-md-12">
                                             <label for="exampleInputEmail1"> <?php echo lang('category'); ?></label>
                                             <select class="form-control m-bot15" name="category" value=''>
                                                 <?php foreach ($categories as $category) { ?>
@@ -42,7 +42,7 @@
                                                         <?php } ?> 
                                             </select>
                                         </div>
-                                        <div class="form-group col-md-4">
+                                        <div class="form-group col-md-4" style="display:none">
                                             <label for="exampleInputEmail1"> <?php echo lang('p_price'); ?></label>
                                             <input type="text" class="form-control" name="price" id="exampleInputEmail1" value='<?php
                                             if (!empty($medicine->price)) {
@@ -50,7 +50,7 @@
                                             }
                                             ?>' placeholder="">
                                         </div>
-                                        <div class="form-group col-md-4">
+                                        <div class="form-group col-md-4" style="display:none">
                                             <label for="exampleInputEmail1"> <?php echo lang('s_price'); ?></label>
                                             <input type="text" class="form-control" name="s_price" id="exampleInputEmail1" value='<?php
                                             if (!empty($medicine->s_price)) {
@@ -58,7 +58,7 @@
                                             }
                                             ?>' placeholder="">
                                         </div>
-                                        <div class="form-group col-md-4">
+                                        <div class="form-group col-md-4" style="display:none">
                                             <label for="exampleInputEmail1"> <?php echo lang('store_box'); ?></label>
                                             <input type="text" class="form-control" name="box" id="exampleInputEmail1" value='<?php
                                             if (!empty($medicine->box)) {
@@ -66,7 +66,7 @@
                                             }
                                             ?>' placeholder="">
                                         </div>
-                                        <div class="form-group col-md-4">
+                                        <div class="form-group col-md-4" style="display:none">
                                             <label for="exampleInputEmail1"> <?php echo lang('quantity'); ?></label>
                                             <input type="text" class="form-control" name="quantity" id="exampleInputEmail1" value='<?php
                                             if (!empty($medicine->quantity)) {
@@ -74,7 +74,7 @@
                                             }
                                             ?>' placeholder="">
                                         </div>
-                                        <div class="form-group col-md-4">
+                                        <div class="form-group col-md-12">
                                             <label for="exampleInputEmail1"> <?php echo lang('generic_name'); ?></label>
                                             <input type="text" class="form-control" name="generic" id="exampleInputEmail1" value='<?php
                                             if (!empty($medicine->generic)) {
@@ -82,15 +82,15 @@
                                             }
                                             ?>' placeholder="">
                                         </div>
-                                        <div class="form-group col-md-4">
-                                            <label for="exampleInputEmail1"> <?php echo lang('company'); ?></label>
+                                        <div class="form-group col-md-12">
+                                            <label for="exampleInputEmail1"> <?php echo "Laboratorio" ?></label>
                                             <input type="text" class="form-control" name="company" id="exampleInputEmail1" value='<?php
                                             if (!empty($medicine->company)) {
                                                 echo $medicine->company;
                                             }
                                             ?>' placeholder="">
                                         </div>
-                                        <div class="form-group col-md-4">
+                                        <div class="form-group col-md-12">
                                             <label for="exampleInputEmail1"> <?php echo lang('effects'); ?></label>
                                             <input type="text" class="form-control" name="effects" id="exampleInputEmail1" value='<?php
                                             if (!empty($medicine->effects)) {
@@ -98,7 +98,7 @@
                                             }
                                             ?>' placeholder="">
                                         </div>
-                                        <div class="form-group col-md-4">
+                                        <div class="form-group col-md-4" style="display:none">
                                             <label for="exampleInputEmail1"> <?php echo lang('expiry_date'); ?></label>
                                             <input type="text" class="form-control default-date-picker" name="e_date" id="exampleInputEmail1" value='<?php
                                             if (!empty($medicine->e_date)) {
@@ -107,6 +107,23 @@
                                             ?>' placeholder="" readonly="">
                                         </div>
 
+                                        <div class="form-group col-md-12">
+                                            <label for="exampleInputEmail1"> <?php echo "Principio Activo"; ?></label>
+                                            <input type="text" class="form-control" name="principio_activo" id="exampleInputEmail1" value='<?php
+                                            if (!empty($medicine->principio_activo)) {
+                                                echo $medicine->principio_activo;
+                                            }
+                                            ?>' placeholder="">
+                                        </div>
+                                        
+                                        <div class="form-group col-md-12">
+                                            <label for="exampleInputEmail1"> <?php echo "Descripcion Medicamento"; ?></label>
+                                            <input type="text" class="form-control" name="descripcion" id="exampleInputEmail1" value='<?php
+                                            if (!empty($medicine->descripcion)) {
+                                                echo $medicine->descripcion;
+                                            }
+                                            ?>' placeholder="">
+                                        </div>
                                         <input type="hidden" name="id" value='<?php
                                         if (!empty($medicine->id)) {
                                             echo $medicine->id;

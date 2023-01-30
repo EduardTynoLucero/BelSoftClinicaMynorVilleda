@@ -127,7 +127,7 @@
 
 
 
-<!-- Add Patient Modal-->
+<!-- MODAL PARA AGREGAR PACIENTE-->
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -195,21 +195,21 @@
                                     echo 'selected';
                                 }
                             }
-                            ?> > Male </option>
+                            ?> > Masculino </option>
                             <option value="Female" <?php
                             if (!empty($patient->sex)) {
                                 if ($patient->sex == 'Female') {
                                     echo 'selected';
                                 }
                             }
-                            ?> > Female </option>
+                            ?> > Femenino </option>
                             <option value="Others" <?php
                             if (!empty($patient->sex)) {
                                 if ($patient->sex == 'Others') {
                                     echo 'selected';
                                 }
                             }
-                            ?> > Others </option>
+                            ?> > Otros </option>
                         </select>
                     </div>
 

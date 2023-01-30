@@ -132,6 +132,9 @@ class Medicine extends MX_Controller {
         $company = $this->input->post('company');
         $effects = $this->input->post('effects');
         $e_date = $this->input->post('e_date');
+
+        $principio_activo = $this->input->post('principio_activo');
+        $descripcion = $this->input->post('descripcion');
         if ((empty($id))) {
             $add_date = date('m/d/y');
         } else {
@@ -145,13 +148,13 @@ class Medicine extends MX_Controller {
         // Validating Category Field
         $this->form_validation->set_rules('category', 'Category', 'trim|required|min_length[2]|max_length[100]|xss_clean');
         // Validating Purchase Price Field
-        $this->form_validation->set_rules('price', 'Purchase Price', 'trim|required|min_length[1]|max_length[100]|xss_clean');
+        $this->form_validation->set_rules('price', 'Purchase Price', 'trim|min_length[1]|max_length[100]|xss_clean');
         // Validating Store Box Field
         $this->form_validation->set_rules('box', 'Store Box', 'trim|min_length[1]|max_length[100]|xss_clean');
         // Validating Selling Price Field
-        $this->form_validation->set_rules('s_price', 'Selling Price', 'trim|required|min_length[1]|max_length[100]|xss_clean');
+        $this->form_validation->set_rules('s_price', 'Selling Price', 'trim|min_length[1]|max_length[100]|xss_clean');
         // Validating Quantity Field
-        $this->form_validation->set_rules('quantity', 'Quantity', 'trim|required|min_length[1]|max_length[100]|xss_clean');
+        $this->form_validation->set_rules('quantity', 'Quantity', 'trim|min_length[1]|max_length[100]|xss_clean');
         // Validating Generic Name Field
         $this->form_validation->set_rules('generic', 'Generic Name', 'trim|required|min_length[2]|max_length[100]|xss_clean');
         // Validating Company Name Field
@@ -159,7 +162,7 @@ class Medicine extends MX_Controller {
         // Validating Effects Field
         $this->form_validation->set_rules('effects', 'Effects', 'trim|min_length[2]|max_length[100]|xss_clean');
         // Validating Expire Date Field
-        $this->form_validation->set_rules('e_date', 'Expire Date', 'trim|required|min_length[1]|max_length[100]|xss_clean');
+        $this->form_validation->set_rules('e_date', 'Expire Date', 'trim|min_length[1]|max_length[100]|xss_clean');
 
 
         if ($this->form_validation->run() == FALSE) {
@@ -182,13 +185,15 @@ class Medicine extends MX_Controller {
                 'effects' => $effects,
                 'add_date' => $add_date,
                 'e_date' => $e_date,
+                'principio_activo' => $principio_activo,
+                'descripcion' => $descripcion
             );
             if (empty($id)) {
                 $this->medicine_model->insertMedicine($data);
-                $this->session->set_flashdata('feedback', 'Added');
+                $this->session->set_flashdata('feedback', 'Agregado');
             } else {
                 $this->medicine_model->updateMedicine($id, $data);
-                $this->session->set_flashdata('feedback', 'Updated');
+                $this->session->set_flashdata('feedback', 'Actualizado');
             }
             redirect('medicine');
         }
@@ -258,7 +263,7 @@ class Medicine extends MX_Controller {
         // Validating Category Name Field
         $this->form_validation->set_rules('category', 'Category', 'trim|required|min_length[2]|max_length[100]|xss_clean');
         // Validating Description Field
-        $this->form_validation->set_rules('description', 'Description', 'trim|required|min_length[5]|max_length[100]|xss_clean');
+        $this->form_validation->set_rules('description', 'Description', 'trim|required|min_length[5]|max_length[1000]|xss_clean');
         if ($this->form_validation->run() == FALSE) {
             $data['settings'] = $this->settings_model->getSettings();
             $this->load->view('home/dashboard', $data); // just the header file

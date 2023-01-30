@@ -228,7 +228,7 @@ class Prescription extends MX_Controller {
         $admin = $this->input->get('admin');
         $patient = $this->input->get('patient');
         $this->prescription_model->deletePrescription($id);
-        $this->session->set_flashdata('feedback', 'Deleted');
+        $this->session->set_flashdata('feedback', 'ELIMINADO');
         if (!empty($patient)) {
             redirect('patient/caseHistory?patient_id=' . $patient);
         } elseif (!empty($admin)) {

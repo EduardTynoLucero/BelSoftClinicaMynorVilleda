@@ -32,7 +32,7 @@ $lang['laboratorist'] = 'Laboratorista';
 $lang['accountant'] = 'Contador'; 
 $lang['payment'] = 'Pago';
 $lang['medicine'] = 'Medicina';
-$lang['report'] = 'Informe';
+$lang['report'] = 'Reporte médico';
 $lang['operation_report'] = 'Informe de operación';
 $lang['birth_report'] = 'Informe de nacimiento';
 $lang['donor'] = 'Donante';
@@ -101,7 +101,7 @@ $lang['add_patient'] = 'Añadir Paciente';
 $lang['register_new_patient'] = 'Registrar Paciente';
 $lang['edit_patient'] = 'Editar paciente';
 $lang['birth_date'] = 'Fecha de nacimiento';
-$lang['blood_group'] = 'Grupo sanguíneo';
+$lang['blood_group'] = 'Tipo de Sangre';
 $lang['due_balance'] = 'Balance de vencimiento';
 $lang['invoice'] = 'Factura';
 $lang['details'] = 'Detalles';
@@ -113,9 +113,9 @@ $lang['gender'] = 'Género';
 
 // Appoinytment
 
-$lang['appointments'] = 'Equipo';
+$lang['appointments'] = 'Citas';
 $lang['appointment'] = 'Cita';
-$lang['id'] = 'Carné de identidad';
+$lang['id'] = 'Correlativo';
 $lang['date-time'] = 'Fecha y hora';
 $lang['remarks'] = 'Observaciones';
 $lang['add_appointment'] = 'Añadir cita';
@@ -222,7 +222,7 @@ $lang['age'] = 'Años';
 $lang['sex'] = 'Sexo';
 $lang['last_donation_date'] = 'Fecha de la última donación';
 $lang['male'] = 'Masculino';
-$lang['female'] = 'Hembra';
+$lang['female'] = 'Femenino';
 $lang['blood_bank'] = 'Banco de Sangre';
 $lang['update_blood_bank'] = 'Actualizar Banco de Sangre';
 $lang['group'] = 'Grupo';
@@ -271,7 +271,7 @@ $lang['system_name'] = 'Nombre del sistema';
 $lang['title'] = 'Título';
 $lang['address'] = 'Dirección';
 $lang['phone'] = 'Teléfono';
-$lang['hospital_email'] = 'Correo electrónico del hospital';
+$lang['hospital_email'] = 'Correo electrónico de la clinica';
 $lang['currency'] = 'Moneda';
 $lang['discount_type'] = 'Tipo de descuento';
 
@@ -454,7 +454,7 @@ $lang['files'] = 'Archivos';
 
 
 
-$lang['prescription'] = 'Prescripción';
+$lang['prescription'] = 'Receta Médica';
 
 $lang['view'] = 'Ver';
 $lang['note'] = 'Nota';
@@ -562,7 +562,7 @@ $lang['to'] = 'a';
 
 $lang['due'] = 'Debido';
 
-$lang['case_history'] = 'Historia del caso';
+$lang['case_history'] = 'Evolucion Medica';
 
 
 $lang['patient_list'] = 'Lista de Pacientes';
@@ -643,7 +643,7 @@ $lang['all_appointments'] = 'Todas las citas';
 $lang['todays_appointments'] = 'Citas de hoy';
 $lang['all'] = 'Todas';
 $lang['add'] = 'Añadir';
-$lang['todays'] = 'Hoy';
+$lang['todays'] = 'Citas de Hoy';
 $lang['upcoming'] = 'Próximo';
 $lang['write_message'] = 'Escribe un mensaje';
 $lang['sent_messages'] = 'Mensajes enviados';
@@ -735,7 +735,7 @@ $lang['arabic'] = 'Arábica';
 
 
 $lang['payment_gateways'] = 'Via de pago';
-$lang['labs'] = 'Pruebas de laboratorio';
+$lang['labs'] = 'Examenes Médicos';
 $lang['add_lab'] = 'Agregar prueba de laboratorio';
 $lang['add_new_lab'] = 'Agregar nueva prueba de laboratorio';
 $lang['edit_lab'] = 'Editar prueba de laboratorio';
@@ -743,11 +743,11 @@ $lang['lab_category'] = 'Categoría de laboratorio';
 $lang['add_lab_category'] = 'Agregar categoría de laboratorio';
 $lang['reference'] = 'Referencia';
 $lang['lab_reports'] = 'Informes de laboratorio';
-$lang['add_lab_report'] = 'Agregar informe de laboratorio';
+$lang['add_lab_report'] = 'Agregar examen médico';
 $lang['lab_tests'] = 'Pruebas de laboratorio';
 $lang['add_lab_test'] = 'Agregar prueba de laboratorio';
 $lang['test_name'] = 'Nombre de la prueba';
-$lang['lab_report'] = 'Reporte de laboratorio';
+$lang['lab_report'] = 'Examenes médicos';
 $lang['reference_value'] = 'Valor de referencia';
 $lang['edit_lab_test'] = 'Editar prueba de laboratorio';
 $lang['report_id'] = 'Id del informe';
@@ -956,7 +956,7 @@ $lang['cases'] = 'Casos';
 
 
 
-$lang['add_case'] = 'Añadir estuche';
+$lang['add_case'] = 'Añadir Evolucion Medica';
 $lang['edit_case'] = 'Editar casoe';
 
 $lang['subject'] = 'Tema';

@@ -26,7 +26,7 @@
                                 <th><?php echo lang('name'); ?></th>
                                 <th><?php echo lang('email'); ?></th>
                                 <th><?php echo lang('phone'); ?></th>
-                                <th><?php echo lang('department'); ?></th>
+                                <th><?php echo "Especialidad" ?></th>
                                 <th><?php echo lang('profile'); ?></th>
                                 <th class="no-print"><?php echo lang('options'); ?></th>
                             </tr>
